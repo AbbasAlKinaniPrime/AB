@@ -916,15 +916,18 @@ footer{color:var(--muted);font-size:.82rem;text-align:center;border-top:1px soli
       <div class="panel">
         <h3><span class="ar">ملفات PDF المتاحة</span><span class="en">Available PDF files</span></h3>
         <div class="lecture-list">
-          {% assign lecture_files = site.static_files | where_exp: "file", "file.path contains '/lectures/' and file.extname == '.pdf'" | sort: "path" %}
-          {% if lecture_files.size > 0 %}
-            {% for file in lecture_files %}
+          {% assign lecture_files = site.static_files | where: "extname", ".pdf" | sort: "path" %}
+          {% assign lecture_count = 0 %}
+          {% for file in lecture_files %}
+            {% if file.path contains '/lectures/' %}
+              {% assign lecture_count = lecture_count | plus: 1 %}
               <div class="lecture-item">
                 <div class="lecture-name"><span class="lecture-icon">PDF</span><span>{{ file.name }}</span></div>
                 <a class="btn lecture-download" href="{{ file.path | relative_url }}" download><span class="ar">تنزيل</span><span class="en">Download</span></a>
               </div>
-            {% endfor %}
-          {% else %}
+            {% endif %}
+          {% endfor %}
+          {% if lecture_count == 0 %}
             <div class="lecture-empty"><span class="ar">لا توجد محاضرات مرفوعة بعد.</span><span class="en">No lectures have been uploaded yet.</span></div>
           {% endif %}
         </div>
