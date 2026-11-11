@@ -209,6 +209,13 @@ table.cmp2{min-width:420px}
 .pulse{width:9px;height:9px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 var(--ok);animation:pulse 2s infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 60%,transparent)}70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}
 @media(prefers-reduced-motion:reduce){.pulse{animation:none}}
+.lecture-list{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.lecture-item{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.lecture-name{display:flex;align-items:center;gap:10px;min-width:0;font-weight:500}
+.lecture-icon{display:grid;place-items:center;flex:none;width:32px;height:32px;border-radius:7px;background:var(--prob-soft);color:var(--prob);font-family:var(--f-mono);font-size:.72rem;font-weight:600}
+.lecture-name span:last-child{overflow-wrap:anywhere}
+.lecture-download{flex:none;text-decoration:none}
+.lecture-empty{padding:18px;border:1px dashed var(--line);border-radius:8px;color:var(--muted);text-align:center}
 footer{color:var(--muted);font-size:.82rem;text-align:center;border-top:1px solid var(--line);padding-top:14px;margin-top:10px}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
@@ -254,6 +261,7 @@ footer{color:var(--muted);font-size:.82rem;text-align:center;border-top:1px soli
   <button class="tab" role="tab" data-v="multistage"><i class="dot"></i><span class="ar">متعددة المراحل</span><span class="en">Multistage (PPS)</span></button>
   <button class="tab np" role="tab" data-v="nonprob"><i class="dot"></i><span class="ar">غير الاحتمالية</span><span class="en">Nonprobability</span></button>
   <button class="tab gen" role="tab" data-v="errors"><i class="dot"></i><span class="ar">محاكي الأخطاء</span><span class="en">Error simulator</span></button>
+  <button class="tab gen" role="tab" data-v="lectures"><i class="dot"></i><span class="ar">المحاضرات</span><span class="en">Lectures</span></button>
 </div></nav>
 
 <main id="main">
@@ -889,6 +897,41 @@ footer{color:var(--muted);font-size:.82rem;text-align:center;border-top:1px soli
     </div>
   </div>
 </section>
+<!-- ============ LECTURES ============ -->
+<section class="view" id="v-lectures" hidden>
+  <div class="vhead">
+    <h2><span class="ar">المحاضرات</span><span class="en">Lectures</span></h2>
+    <p><span class="ar">ملفات المحاضرات بصيغة PDF. تُحدَّث هذه القائمة تلقائياً عند إضافة ملف PDF جديد إلى مجلد <span class="ix">lectures/</span> في المستودع.</span>
+       <span class="en">PDF lecture files. This list updates automatically whenever a new PDF is added to the <span class="ix">lectures/</span> folder in the repository.</span></p>
+  </div>
+  <div class="split">
+    <div class="col">
+      <div class="panel">
+        <h3><span class="ar">الوصول السريع</span><span class="en">Quick access</span></h3>
+        <p class="muted"><span class="ar">اختر أي محاضرة لفتحها أو تنزيلها. استخدم قارئ PDF في جهازك للدراسة دون اتصال.</span><span class="en">Choose any lecture to open or download it. Use your device's PDF reader for offline study.</span></p>
+        <div class="note"><span class="ar">يُسمح بملفات PDF فقط في هذه القائمة.</span><span class="en">Only PDF files are shown in this list.</span></div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="panel">
+        <h3><span class="ar">ملفات PDF المتاحة</span><span class="en">Available PDF files</span></h3>
+        <div class="lecture-list">
+          {% assign lecture_files = site.static_files | where_exp: "file", "file.path contains '/lectures/' and file.extname == '.pdf'" | sort: "path" %}
+          {% if lecture_files.size > 0 %}
+            {% for file in lecture_files %}
+              <div class="lecture-item">
+                <div class="lecture-name"><span class="lecture-icon">PDF</span><span>{{ file.name }}</span></div>
+                <a class="btn lecture-download" href="{{ file.path | relative_url }}" download><span class="ar">تنزيل</span><span class="en">Download</span></a>
+              </div>
+            {% endfor %}
+          {% else %}
+            <div class="lecture-empty"><span class="ar">لا توجد محاضرات مرفوعة بعد.</span><span class="en">No lectures have been uploaded yet.</span></div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
 
 <footer><span class="ar">© 2026 جميع الحقوق محفوظة لـ Samplify Kinani | د. عباس الكناني - جامعة العين العراقية - كلية الطب - فرع طب المجتمع</span><span class="en">© 2026 All rights reserved to Samplify Kinani | Dr. Abbas Al-Kinani - Al-Ayn Iraqi University - College of Medicine - Department of Community Medicine</span></footer>
@@ -921,7 +964,7 @@ function setLang(l){const h=document.documentElement;h.lang=l;h.dir=l==='ar'?'rt
   ssType.options[0].text=t('نسبة (انتشار)','Proportion (prevalence)');ssType.options[1].text=t('متوسط','Mean');
   stMode.options[0].text=t('تناسبي','Proportional');stMode.options[1].text=t('نيمان','Neyman');
   renderAll()}
-const views=['overview','eligibility','size','random','srs','systematic','stratified','cluster','multistage','nonprob','errors'];
+const views=['overview','eligibility','size','random','srs','systematic','stratified','cluster','multistage','nonprob','errors','lectures'];
 function show(v){if(!views.includes(v))v='overview';
   views.forEach(x=>$('v-'+x).hidden=x!==v);
   document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.v===v?'true':'false'))}
