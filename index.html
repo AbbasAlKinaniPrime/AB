@@ -1,0 +1,1277 @@
+---
+layout: null
+---
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Samplify Kinani: منصة تفاعلية مجانية لتعليم تقنيات أخذ العينات وحساب حجم العينة في البحوث الصحية: العشوائية البسيطة والمنتظمة والطبقية والعنقودية ومتعددة المراحل وغير الاحتمالية، مع حاسبات ومحاكي لأخطاء المعاينة. إعداد د. عباس الكناني، جامعة العين العراقية.">
+<meta name="author" content="د. عباس الكناني - Dr. Abbas Al-Kinani">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="{{ site.github.url }}/">
+<meta name="theme-color" content="#1f5a96">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Samplify Kinani">
+<meta property="og:title" content="Samplify Kinani | منصة العينات الإحصائية التفاعلية">
+<meta property="og:description" content="منصة تفاعلية لتقنيات أخذ العينات وحساب حجم العينة في البحوث الصحية. Interactive sampling techniques and sample size platform.">
+<meta property="og:url" content="{{ site.github.url }}/">
+<meta property="og:image" content="{{ site.github.url }}/og-image.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:locale" content="ar_IQ"><meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Samplify Kinani | منصة العينات الإحصائية التفاعلية">
+<meta name="twitter:image" content="{{ site.github.url }}/og-image.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": ["WebApplication", "LearningResource"], "name": "Samplify Kinani", "alternateName": "منصة العينات الإحصائية التفاعلية", "url": "{{ site.github.url }}/", "description": "Free bilingual (Arabic/English) interactive platform for learning sampling techniques and sample size calculation in health research: simple random, systematic, stratified, cluster, multistage (PPS) and nonprobability sampling, with calculators, a random number table and a sampling-error simulator.", "inLanguage": ["ar", "en"], "applicationCategory": "EducationalApplication", "operatingSystem": "Any web browser", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "educationalLevel": "Undergraduate medical education", "learningResourceType": ["Interactive tool", "Calculator", "Simulation"], "teaches": ["Probability sampling", "Nonprobability sampling", "Sample size calculation", "Sampling and non-sampling errors", "Inclusion and exclusion criteria"], "keywords": "sampling techniques, sample size calculation, biostatistics, stratified sampling, cluster sampling, systematic sampling, أخذ العينات, حجم العينة, الإحصاء الحيوي", "image": "{{ site.github.url }}/og-image.png", "author": {"@type": "Person", "name": "Abbas Ali Abdulhasan Al-Kinani", "alternateName": "د. عباس الكناني", "jobTitle": "Specialist in Community Medicine and Public Health (PhD)", "affiliation": {"@type": "CollegeOrUniversity", "name": "Al-Ayn Iraqi University, College of Medicine, Department of Community Medicine"}}, "copyrightHolder": {"@type": "Person", "name": "Abbas Ali Abdulhasan Al-Kinani"}, "copyrightYear": 2026, "dateModified": "2026-11-10"}</script>
+<title>Samplify Kinani | منصة العينات الإحصائية التفاعلية</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Readex+Pro:wght@500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>html{color-scheme:light}[hidden]{display:none!important}body{margin:0;font-size:14px}img{max-width:100%}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<style>
+/* Layout: header + sticky tab bar; one method per tab; inside each tab a "how to" column and a tool column. Bilingual via html[lang]. */
+:root{
+  --bg:#f3f5f8; --surface:#ffffff; --ink:#15233a; --muted:#56637a; --line:#dce2ea;
+  --prob:#1f5a96; --prob-soft:#e6eef8; --nonp:#a8641a; --nonp-soft:#f8eedf;
+  --ok:#1d7a52; --ok-soft:#e3f3ea; --warn:#9a5b00; --warn-soft:#fdf2e0;
+  --f-display:"Readex Pro","IBM Plex Sans Arabic",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans Arabic",system-ui,"Segoe UI",Tahoma,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1622; --surface:#172131; --ink:#e6ecf4; --muted:#9aa8bc; --line:#2a374b;
+  --prob:#7fb2ea; --prob-soft:#1b2c44; --nonp:#e2a75e; --nonp-soft:#33271a;
+  --ok:#5fcb97; --ok-soft:#173326; --warn:#e8b35c; --warn-soft:#352915; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1622; --surface:#172131; --ink:#e6ecf4; --muted:#9aa8bc; --line:#2a374b;
+  --prob:#7fb2ea; --prob-soft:#1b2c44; --nonp:#e2a75e; --nonp-soft:#33271a;
+  --ok:#5fcb97; --ok-soft:#173326; --warn:#e8b35c; --warn-soft:#352915; color-scheme:dark}
+
+html[lang="en"] .ar{display:none!important}
+html[lang="ar"] .en{display:none!important}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.7;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1160px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+header.top{display:flex;flex-direction:column;gap:14px}
+.affil{display:flex;align-items:center;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.logo{width:56px;height:56px;flex:none;border-radius:50%;border:2px solid var(--prob);display:grid;place-items:center;overflow:hidden;background:var(--surface)}
+.logo img{width:100%;height:100%;object-fit:contain}
+.logo-ph{font-family:var(--f-display);font-weight:700;font-size:.72rem;letter-spacing:.06em;color:var(--prob)}
+.affil-txt{display:flex;flex-direction:column;line-height:1.45;min-width:0;flex:1}
+.affil-txt b{font-family:var(--f-display);font-weight:700;font-size:1rem}
+.affil-txt>span{font-size:.85rem;color:var(--muted)}
+.brand{display:flex;align-items:center;gap:18px}
+.brandlogo{width:96px;height:auto;flex:none;background:#fff;border-radius:16px;padding:6px;border:1px solid var(--line)}
+.brandtxt{min-width:0;flex:1}
+@media(max-width:480px){.brand{flex-direction:column;align-items:flex-start;gap:12px}.brandlogo{width:80px}}
+.brand h1{font-family:var(--f-display);font-weight:700;font-size:clamp(2rem,6vw,2.9rem);line-height:1.1;margin:0;letter-spacing:-.01em;text-align:start}
+html[dir="rtl"] .brand h1{text-align:right}
+.brand h1 em{font-style:normal;color:var(--prob)}
+.brand p{margin:8px 0 0;color:var(--muted);max-width:80ch}
+.langbtn{font:inherit;font-weight:600;font-size:.9rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);
+  border-radius:99px;padding:6px 16px;cursor:pointer;white-space:nowrap}
+.langbtn:hover{border-color:var(--prob)}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:6px;
+  border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:thin}
+.tabs{display:flex;gap:4px;min-width:max-content}
+.tab{font:inherit;font-size:.88rem;font-weight:500;border:none;background:none;color:var(--muted);padding:8px 12px;border-radius:6px;cursor:pointer;white-space:nowrap}
+.tab:hover{color:var(--ink);background:var(--surface)}
+.tab[aria-selected="true"]{color:var(--surface);background:var(--prob)}
+.tab.np[aria-selected="true"]{background:var(--nonp)}
+.tab .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--prob);margin-inline-end:6px;vertical-align:middle}
+.tab.np .dot{background:var(--nonp)} .tab.gen .dot{background:var(--muted)}
+.tab[aria-selected="true"] .dot{background:var(--surface)}
+
+section.view{display:flex;flex-direction:column;gap:18px}
+.vhead h2{font-family:var(--f-display);font-weight:700;font-size:1.35rem;margin:0}
+.vhead p{margin:4px 0 0;color:var(--muted);max-width:75ch}
+.split{display:grid;grid-template-columns:1fr;gap:18px}
+@media(min-width:960px){.split{grid-template-columns:minmax(0,5fr) minmax(0,6fr);align-items:start}}
+.col{display:flex;flex-direction:column;gap:18px;min-width:0}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px;min-width:0}
+h3{font-family:var(--f-display);font-weight:500;font-size:1.05rem;margin:0 0 8px}
+h4{font-size:.8rem;font-weight:600;letter-spacing:.03em;color:var(--muted);margin:14px 0 4px;text-transform:uppercase}
+p{margin:0 0 8px}
+.muted{color:var(--muted);font-size:.9rem}
+ol.steps{margin:0;padding-inline-start:0;list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:8px}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:26px 1fr;gap:8px;font-size:.93rem}
+ol.steps li::before{content:counter(s);font-family:var(--f-mono);font-size:.8rem;font-weight:500;width:24px;height:24px;border-radius:50%;
+  display:grid;place-items:center;background:var(--prob-soft);color:var(--prob);margin-top:2px}
+.np ol.steps li::before{background:var(--nonp-soft);color:var(--nonp)}
+ul.pc{margin:0;padding-inline-start:18px;font-size:.9rem}
+.pcgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:4px 18px}
+.pro h4{color:var(--ok)} .con h4{color:var(--warn)}
+.fx{direction:ltr;unicode-bidi:isolate;font-family:var(--f-mono);font-size:.95rem;background:var(--bg);border:1px solid var(--line);
+  border-radius:8px;padding:10px 14px;margin:6px 0 10px;text-align:center;overflow-x:auto;white-space:nowrap}
+.fx .lbl{display:block;font-family:var(--f-body);font-size:.75rem;color:var(--muted);margin-bottom:2px;white-space:normal}
+.ix{font-family:var(--f-mono);direction:ltr;unicode-bidi:isolate;font-size:.88em;background:var(--bg);border:1px solid var(--line);border-radius:5px;padding:0 6px;white-space:nowrap}
+.gl{direction:ltr;unicode-bidi:isolate;color:var(--muted);font-size:.88em}
+dl.where{display:grid;grid-template-columns:max-content 1fr;gap:2px 12px;font-size:.88rem;margin:0}
+dl.where dt{font-family:var(--f-mono);direction:ltr;unicode-bidi:isolate}
+dl.where dd{margin:0;color:var(--muted)}
+
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+label{display:flex;flex-direction:column;gap:4px;font-size:.84rem;font-weight:500}
+input,select{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);width:100%;min-width:0}
+input[type="number"]{font-family:var(--f-mono);direction:ltr;text-align:left}
+input:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid var(--prob);outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.btn{font:inherit;font-weight:600;font-size:.88rem;border-radius:6px;padding:8px 16px;cursor:pointer;border:1px solid var(--prob);background:var(--prob);color:var(--surface)}
+.btn.ghost{background:transparent;color:var(--prob)}
+.btn:hover{filter:brightness(1.08)}
+.out{margin-top:14px;display:flex;flex-direction:column;gap:10px}
+.stats{display:flex;flex-wrap:wrap;gap:8px 26px}
+.stat{display:flex;flex-direction:column}
+.stat span{font-size:.76rem;color:var(--muted)}
+.stat b{font-family:var(--f-mono);font-size:1.25rem;font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:isolate}
+.stat.key b{color:var(--ok);font-size:1.5rem}
+.note{font-size:.86rem;padding:8px 12px;border-radius:6px;background:var(--prob-soft)}
+.note.warn{background:var(--warn-soft);border-inline-start:3px solid var(--warn)}
+.note.ok{background:var(--ok-soft);border-inline-start:3px solid var(--ok)}
+.calc{display:flex;flex-direction:column;gap:4px;direction:ltr;font-family:var(--f-mono);font-size:.86rem;background:var(--bg);
+  border:1px solid var(--line);border-radius:8px;padding:10px 14px;overflow-x:auto}
+.calc div{white-space:nowrap}
+.calc .c{color:var(--muted);font-family:var(--f-body)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;direction:ltr}
+.chip{font-family:var(--f-mono);font-size:.8rem;font-variant-numeric:tabular-nums;padding:1px 8px;border-radius:5px;border:1px solid var(--line);background:var(--bg)}
+.chip.start{border-color:var(--prob);color:var(--prob);font-weight:600}
+.tablewrap{overflow-x:auto;margin-top:12px}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+table.ed{min-width:560px}
+th,td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:start;vertical-align:top}
+th{font-size:.76rem;color:var(--muted);font-weight:600}
+td.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;direction:ltr;text-align:end}
+td input{padding:5px 8px}
+tfoot td{font-weight:600;border-bottom:none}
+tr.hit td{background:var(--ok-soft)}
+.x{background:none;border:none;color:var(--muted);padding:2px 6px;font-size:1.1rem;cursor:pointer}
+table.cmp{min-width:760px}
+table.cmp td:first-child{font-weight:600;white-space:nowrap}
+.pill{display:inline-block;font-size:.72rem;font-weight:600;padding:1px 8px;border-radius:99px}
+.pill.p{background:var(--prob-soft);color:var(--prob)} .pill.n{background:var(--nonp-soft);color:var(--nonp)}
+.terms{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px 20px;font-size:.9rem}
+.terms div b{display:block}
+.terms div span{color:var(--muted)}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.noS .colS{display:none}
+.refs{margin:0;padding-inline-start:20px;font-size:.84rem;direction:ltr;text-align:left;display:flex;flex-direction:column;gap:4px}
+html[dir="rtl"] .refs{padding-inline-start:0;padding-left:20px}
+textarea{font:inherit;font-family:var(--f-mono);font-size:.85rem;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);width:100%;min-width:0;resize:vertical;direction:ltr}
+.legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-size:.8rem;color:var(--muted);margin-top:12px}
+.lg{display:inline-block;width:12px;height:12px;border-radius:3px;margin-inline-start:6px}
+.lg.acc{background:var(--ok-soft);border:1px solid var(--ok)} .lg.rej{background:var(--bg);border:1px dashed var(--muted)} .lg.dup{background:var(--warn-soft);border:1px solid var(--warn)}
+.lg.tru{background:var(--ok)} .lg.mea{background:var(--warn)}
+table.rnt{direction:ltr;font-family:var(--f-mono);font-size:.82rem;min-width:620px;border-collapse:separate;border-spacing:0}
+table.rnt th{text-align:center;font-family:var(--f-body);padding:4px}
+table.rnt td{padding:3px 5px;text-align:center;border-bottom:none;letter-spacing:.05em}
+table.rnt th.rh{text-align:end;color:var(--muted)}
+.dg{display:inline-block;padding:0 1px;border-bottom:2px solid transparent}
+.dg.acc{background:var(--ok-soft);color:var(--ok);font-weight:500}
+.dg.rej{color:var(--muted);text-decoration:line-through}
+.dg.dup{background:var(--warn-soft);color:var(--warn)}
+.dg.alt{border-bottom-color:var(--line)}
+.dg.st{outline:2px solid var(--prob);outline-offset:1px;border-radius:2px}
+.quiz{display:flex;flex-direction:column;gap:10px}
+.qi{border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.qi p{margin:0 0 8px;font-size:.92rem}
+.qb{display:flex;flex-wrap:wrap;gap:6px}
+.qb button{font:inherit;font-size:.8rem;padding:4px 10px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.qb button.right{background:var(--ok-soft);border-color:var(--ok);color:var(--ok);font-weight:600}
+.qb button.wrong{background:var(--warn-soft);border-color:var(--warn);color:var(--warn)}
+.qf{font-size:.84rem;color:var(--muted);margin-top:6px}
+.flow{display:flex;flex-direction:column;gap:0;align-items:stretch}
+.fr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;align-items:center}
+.fb{border:1px solid var(--prob);border-radius:8px;padding:8px 10px;font-size:.84rem;background:var(--surface)}
+.fb b{display:block;font-family:var(--f-mono);font-size:1.05rem;direction:ltr;unicode-bidi:isolate;text-align:start}
+.fb.side{border-color:var(--line);border-style:dashed;color:var(--muted)}
+.fb.end{border-width:2px;background:var(--prob-soft)}
+.arrow{width:2px;height:16px;background:var(--prob);margin-inline-start:25%}
+.presets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.presets .btn{font-size:.8rem;padding:6px 12px}
+.sliders{display:flex;flex-direction:column;gap:12px}
+.sliders label>span{display:flex;justify-content:space-between;gap:10px}
+.sliders b{font-family:var(--f-mono);direction:ltr;unicode-bidi:isolate}
+input[type="range"]{padding:0;border:none;accent-color:var(--prob);background:transparent}
+.chart{width:100%;margin-top:8px}
+.chart svg{display:block;width:100%;height:auto}
+.chart .bar{fill:var(--prob);opacity:.75}
+.chart .ax{stroke:var(--line)} .chart text{fill:var(--muted);font-family:var(--f-mono);font-size:11px}
+.chart .tru{stroke:var(--ok);stroke-width:2.5} .chart .mea{stroke:var(--warn);stroke-width:2.5;stroke-dasharray:5 4}
+.pill.ok{background:var(--ok-soft);color:var(--ok)} .pill.no{background:var(--warn-soft);color:var(--warn)}
+table.cmp2{min-width:420px}
+.visits{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;font-size:.84rem;color:var(--muted);padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.visits b{font-family:var(--f-mono);font-variant-numeric:tabular-nums;color:var(--ink);font-weight:500;direction:ltr;unicode-bidi:isolate}
+.vlive{display:inline-flex;align-items:center;gap:6px;color:var(--ok);font-weight:600}
+.vlive b{color:var(--ok)}
+.pulse{width:9px;height:9px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 var(--ok);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 60%,transparent)}70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}
+@media(prefers-reduced-motion:reduce){.pulse{animation:none}}
+footer{color:var(--muted);font-size:.82rem;text-align:center;border-top:1px solid var(--line);padding-top:14px;margin-top:10px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+<header class="top">
+  <div class="affil">
+    <div class="affil-txt">
+      <b><span class="ar">جامعة العين العراقية</span><span class="en">Al-Ayn Iraqi University</span></b>
+      <span><span class="ar">كلية الطب · فرع طب المجتمع</span><span class="en">College of Medicine · Department of Community Medicine</span></span>
+    </div>
+    <button type="button" class="langbtn" id="langBtn"><span class="ar">English</span><span class="en">العربية</span></button>
+  </div>
+  <div class="brand">
+    <img class="brandlogo" src="data:image/webp;base64,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" alt="Samplify Kinani logo" width="320" height="316">
+    <div class="brandtxt">
+    <h1 dir="ltr">Samplify <em>Kinani</em></h1>
+    <p><span class="ar">منصة أخذ العينات التفاعلية - إشراف وإعداد د. عباس الكناني | جامعة العين العراقية - كلية الطب - فرع طب المجتمع</span>
+       <span class="en">Interactive Sampling Platform - Prepared and supervised by Dr. Abbas Al-Kinani | Al-Ayn Iraqi University - College of Medicine - Department of Community Medicine</span></p>
+    </div>
+  </div>
+</header>
+
+<div class="visits" id="visits" hidden aria-live="polite">
+  <span class="vlive"><i class="pulse"></i><b id="vsLive">0</b> <span class="ar">متصل الآن</span><span class="en">online now</span></span>
+  <span><b id="vsToday">0</b> <span class="ar">زيارة اليوم</span><span class="en">visits today</span></span>
+  <span><b id="vsTotal">0</b> <span class="ar">إجمالي الزيارات</span><span class="en">total visits</span></span>
+  <span><b id="vsUniq">0</b> <span class="ar">زائر</span><span class="en">visitors</span></span>
+</div>
+
+<nav aria-label="Sections"><div class="tabs" role="tablist" id="tabs">
+  <button class="tab gen" role="tab" data-v="overview"><i class="dot"></i><span class="ar">نظرة عامة</span><span class="en">Overview</span></button>
+  <button class="tab gen" role="tab" data-v="eligibility"><i class="dot"></i><span class="ar">معايير الاشتمال</span><span class="en">Eligibility</span></button>
+  <button class="tab gen" role="tab" data-v="size"><i class="dot"></i><span class="ar">حجم العينة</span><span class="en">Sample size</span></button>
+  <button class="tab gen" role="tab" data-v="random"><i class="dot"></i><span class="ar">الأرقام العشوائية</span><span class="en">Random numbers</span></button>
+  <button class="tab" role="tab" data-v="srs"><i class="dot"></i><span class="ar">العشوائية البسيطة</span><span class="en">Simple random</span></button>
+  <button class="tab" role="tab" data-v="systematic"><i class="dot"></i><span class="ar">المنتظمة</span><span class="en">Systematic</span></button>
+  <button class="tab" role="tab" data-v="stratified"><i class="dot"></i><span class="ar">الطبقية</span><span class="en">Stratified</span></button>
+  <button class="tab" role="tab" data-v="cluster"><i class="dot"></i><span class="ar">العنقودية</span><span class="en">Cluster</span></button>
+  <button class="tab" role="tab" data-v="multistage"><i class="dot"></i><span class="ar">متعددة المراحل</span><span class="en">Multistage (PPS)</span></button>
+  <button class="tab np" role="tab" data-v="nonprob"><i class="dot"></i><span class="ar">غير الاحتمالية</span><span class="en">Nonprobability</span></button>
+  <button class="tab gen" role="tab" data-v="errors"><i class="dot"></i><span class="ar">محاكي الأخطاء</span><span class="en">Error simulator</span></button>
+</div></nav>
+
+<main id="main">
+
+<!-- ============ OVERVIEW ============ -->
+<section class="view" id="v-overview">
+  <div class="vhead">
+    <h2><span class="ar">من المجتمع إلى العينة</span><span class="en">From population to sample</span></h2>
+    <p><span class="ar">العينة الجيدة تمثل المجتمع المستهدف، وحجمها كافٍ لتقدير المؤشر بالدقة المطلوبة. الطريقة تحدد التمثيل، والحجم يحدد الدقة.</span>
+       <span class="en">A good sample represents the target population and is large enough to estimate the indicator with the required precision. The method determines representativeness; the size determines precision.</span></p>
+  </div>
+
+  <div class="panel">
+    <h3><span class="ar">مصطلحات أساسية</span><span class="en">Key terms</span></h3>
+    <div class="terms">
+      <div><b><span class="ar">المجتمع المستهدف</span><span class="en">Target population</span></b><span class="ar">من نريد تعميم النتائج عليهم.</span><span class="en">Those to whom results will be generalized.</span></div>
+      <div><b><span class="ar">مجتمع الدراسة</span><span class="en">Study population</span></b><span class="ar">الجزء الذي يمكن الوصول إليه فعلياً.</span><span class="en">The accessible part of the target population.</span></div>
+      <div><b><span class="ar">إطار المعاينة</span><span class="en">Sampling frame</span></b><span class="ar">قائمة بجميع وحدات المعاينة (سجلات، قوائم أسر).</span><span class="en">A list of all sampling units (registers, household lists).</span></div>
+      <div><b><span class="ar">وحدة المعاينة</span><span class="en">Sampling unit</span></b><span class="ar">ما يُسحب: فرد، أسرة، مركز صحي.</span><span class="en">What is selected: a person, household, health centre.</span></div>
+      <div><b><span class="ar">كسر المعاينة</span><span class="en">Sampling fraction</span></b><span class="ix">f = n / N</span></div>
+      <div><b><span class="ar">خطأ المعاينة</span><span class="en">Sampling error</span></b><span class="ar">الفرق الناتج عن الصدفة بين العينة والمجتمع، ويقل بزيادة n.</span><span class="en">Chance difference between sample and population; shrinks as n grows.</span></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3><span class="ar">مسار العمل</span><span class="en">Workflow</span></h3>
+    <ol class="steps ar">
+      <li>حدد المجتمع المستهدف ومعايير الاشتمال والاستبعاد.</li>
+      <li>احصل على إطار معاينة أو قرر كيف ستبنيه.</li>
+      <li>احسب حجم العينة (تبويب حجم العينة)، مع معامل التصميم ونسبة عدم الاستجابة.</li>
+      <li>اختر طريقة المعاينة حسب توفر الإطار وتوزع المجتمع والميزانية.</li>
+      <li>نفذ السحب ووثق كل خطوة (البذرة العشوائية، الفاصل، البداية).</li>
+      <li>حلل البيانات بما يناسب التصميم (أوزان، تصحيح العنقودية)، وأبلغ عنها وفق STROBE.</li>
+    </ol>
+    <ol class="steps en">
+      <li>Define the target population and inclusion/exclusion criteria.</li>
+      <li>Obtain a sampling frame, or decide how it will be built.</li>
+      <li>Calculate sample size (Sample size tab), including design effect and nonresponse.</li>
+      <li>Choose the method based on frame availability, population distribution and budget.</li>
+      <li>Carry out the selection and document every step (random seed, interval, start).</li>
+      <li>Analyse according to the design (weights, clustering) and report per STROBE.</li>
+    </ol>
+  </div>
+
+  <div class="panel">
+    <h3><span class="ar">مقارنة الطرق</span><span class="en">Comparison of methods</span></h3>
+    <div class="tablewrap"><table class="cmp">
+      <thead><tr>
+        <th><span class="ar">الطريقة</span><span class="en">Method</span></th>
+        <th><span class="ar">النوع</span><span class="en">Type</span></th>
+        <th><span class="ar">يتطلب إطاراً كاملاً</span><span class="en">Full frame needed</span></th>
+        <th><span class="ar">متى تُستخدم</span><span class="en">Use when</span></th>
+        <th><span class="ar">القيد الرئيسي</span><span class="en">Main limitation</span></th>
+      </tr></thead>
+      <tbody>
+        <tr><td><span class="ar">عشوائية بسيطة</span><span class="en">Simple random</span></td><td><span class="pill p">P</span></td><td><span class="ar">نعم</span><span class="en">Yes</span></td>
+          <td><span class="ar">مجتمع صغير متجانس وقائمة متاحة</span><span class="en">Small, homogeneous population with a list</span></td><td><span class="ar">مكلفة إذا كان المجتمع منتشراً جغرافياً</span><span class="en">Costly if population is dispersed</span></td></tr>
+        <tr><td><span class="ar">منتظمة</span><span class="en">Systematic</span></td><td><span class="pill p">P</span></td><td><span class="ar">نعم، أو تدفق متسلسل</span><span class="en">Yes, or a sequential flow</span></td>
+          <td><span class="ar">سجلات مرتبة، مراجعين متتابعين</span><span class="en">Ordered records, consecutive attendees</span></td><td><span class="ar">تحيز إذا تزامن الفاصل مع نمط دوري</span><span class="en">Bias if the interval matches a periodic pattern</span></td></tr>
+        <tr><td><span class="ar">طبقية</span><span class="en">Stratified</span></td><td><span class="pill p">P</span></td><td><span class="ar">نعم، لكل طبقة</span><span class="en">Yes, per stratum</span></td>
+          <td><span class="ar">مجموعات فرعية مهمة يجب تمثيلها</span><span class="en">Key subgroups must be represented</span></td><td><span class="ar">تتطلب معرفة متغير التقسيم مسبقاً</span><span class="en">Stratifying variable must be known in advance</span></td></tr>
+        <tr><td><span class="ar">عنقودية</span><span class="en">Cluster</span></td><td><span class="pill p">P</span></td><td><span class="ar">قائمة العناقيد فقط</span><span class="en">List of clusters only</span></td>
+          <td><span class="ar">مجتمع واسع ولا توجد قائمة أفراد</span><span class="en">Large area, no list of individuals</span></td><td><span class="ar">دقة أقل، تحتاج n أكبر (معامل التصميم)</span><span class="en">Lower precision; larger n (design effect)</span></td></tr>
+        <tr><td><span class="ar">متعددة المراحل</span><span class="en">Multistage</span></td><td><span class="pill p">P</span></td><td><span class="ar">قوائم في كل مرحلة</span><span class="en">Lists at each stage</span></td>
+          <td><span class="ar">المسوح الوطنية والمحافظية</span><span class="en">National and provincial surveys</span></td><td><span class="ar">تحليل معقد يحتاج أوزاناً</span><span class="en">Complex analysis with weights</span></td></tr>
+        <tr><td><span class="ar">ملائمة / حصصية / غرضية / كرة الثلج</span><span class="en">Convenience / quota / purposive / snowball</span></td><td><span class="pill n">NP</span></td><td><span class="ar">لا</span><span class="en">No</span></td>
+          <td><span class="ar">دراسات استكشافية، نوعية، فئات يصعب الوصول إليها</span><span class="en">Exploratory, qualitative, hard-to-reach groups</span></td><td><span class="ar">لا يمكن تقدير خطأ المعاينة أو التعميم</span><span class="en">Sampling error and generalizability cannot be established</span></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="panel">
+    <h3><span class="ar">المراجع العلمية للمنصة</span><span class="en">References used in this platform</span></h3>
+    <ol class="refs">
+      <li>Daniel WW, Cross CL. <i>Biostatistics: A Foundation for Analysis in the Health Sciences.</i> Wiley. Sections 6.7–6.8 (sample size).</li>
+      <li>Cochran WG. <i>Sampling Techniques.</i> 3rd ed. New York: Wiley; 1977.</li>
+      <li>Kish L. <i>Survey Sampling.</i> New York: Wiley; 1965.</li>
+      <li>Lohr SL. <i>Sampling: Design and Analysis.</i> 3rd ed. Boca Raton: CRC Press; 2021.</li>
+      <li>Naing L, Winn T, Rusli BN. Practical issues in calculating the sample size for prevalence studies. <i>Arch Orofac Sci.</i> 2006;1:9–14.</li>
+      <li>Eldridge SM, Ashby D, Kerry S. Sample size for cluster randomized trials: effect of coefficient of variation of cluster size and analysis method. <i>Int J Epidemiol.</i> 2006;35:1292–1300.</li>
+      <li>Patino CM, Ferreira JC. Inclusion and exclusion criteria in research studies: definitions and why they matter. <i>J Bras Pneumol.</i> 2018;44(2):84.</li>
+      <li>von Elm E, Altman DG, Egger M, et al. The STROBE statement. <i>Lancet.</i> 2007;370:1453–1457.</li>
+      <li>World Health Organization. <i>Vaccination Coverage Cluster Surveys: Reference Manual.</i> Geneva: WHO; 2018.</li>
+      <li>Ahmed SK. How to choose a sampling technique and determine sample size for research: a simplified guide for researchers. 2024.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ ELIGIBILITY ============ -->
+<section class="view" id="v-eligibility" hidden>
+  <div class="vhead">
+    <h2><span class="ar">معايير الاشتمال والاستبعاد ومخطط تدفق المشاركين</span><span class="en">Inclusion/exclusion criteria and participant flow</span></h2>
+    <p><span class="ar">معايير الاشتمال تعرّف مجتمع الدراسة. معايير الاستبعاد تُطبق على من حقق الاشتمال فقط، لإخراج من قد يضر وجوده بالسلامة أو بدقة القياس.</span>
+       <span class="en">Inclusion criteria define the study population. Exclusion criteria apply only to people who already meet inclusion, removing those whose participation would compromise safety or measurement validity.</span></p>
+  </div>
+  <div class="split">
+    <div class="col">
+      <div class="panel">
+        <h3><span class="ar">قواعد الصياغة الصحيحة</span><span class="en">Rules for sound criteria</span></h3>
+        <ol class="steps ar">
+          <li>الاشتمال يحدد الخصائص الأساسية: المجتمع، المكان، الزمن، الحالة (مثلاً: الحوامل المراجعات لعيادة الرعاية في المستشفى، كانون الثاني إلى آذار 2026).</li>
+          <li>الاستبعاد ليس نفي الاشتمال. إذا كان الاشتمال "العمر 18 فأكثر" فلا معنى لاستبعاد "العمر أقل من 18".</li>
+          <li>كل معيار قابل للقياس الموضوعي، ومحدد قبل جمع البيانات، ومبرر علمياً.</li>
+          <li>الرفض أو عدم إكمال الاستبيان ليس معيار استبعاد، بل عدم استجابة يُبلغ عنه في مخطط التدفق.</li>
+          <li>كثرة الاستبعادات تضعف الصدق الخارجي (قابلية التعميم).</li>
+          <li>أبلغ عن عدد المستبعدين لكل سبب (STROBE، البند 13).</li>
+        </ol>
+        <ol class="steps en">
+          <li>Inclusion states the core characteristics: population, setting, time, condition (e.g., pregnant women attending the hospital antenatal clinic, January–March 2026).</li>
+          <li>Exclusion is not the negation of inclusion. If inclusion is "aged ≥18", excluding "aged &lt;18" is redundant.</li>
+          <li>Every criterion is objectively measurable, set before data collection, and justified.</li>
+          <li>Refusal or an incomplete questionnaire is not an exclusion criterion; it is nonresponse, reported in the flow diagram.</li>
+          <li>Excessive exclusions weaken external validity (generalizability).</li>
+          <li>Report the number excluded for each reason (STROBE item 13).</li>
+        </ol>
+      </div>
+      <div class="panel">
+        <h3><span class="ar">اختبر نفسك: صنّف كل معيار</span><span class="en">Test yourself: classify each criterion</span></h3>
+        <p class="muted"><span class="ar">دراسة مقطعية لانتشار فقر الدم بنقص الحديد بين الحوامل.</span><span class="en">Cross-sectional study of iron-deficiency anaemia prevalence in pregnant women.</span></p>
+        <div id="quiz" class="quiz"></div>
+        <div class="out" id="quizScore"></div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="panel">
+        <h3><span class="ar">حاسبة مخطط تدفق المشاركين</span><span class="en">Participant flow calculator</span></h3>
+        <div class="fields">
+          <label for="flA"><span class="ar">تم تقييم أهليتهم</span><span class="en">Assessed for eligibility</span><input id="flA" type="number" min="0" step="1" value="420"></label>
+          <label for="flI"><span class="ar">لم يحققوا الاشتمال</span><span class="en">Did not meet inclusion</span><input id="flI" type="number" min="0" step="1" value="60"></label>
+          <label for="flE"><span class="ar">حققوا معيار استبعاد</span><span class="en">Met an exclusion criterion</span><input id="flE" type="number" min="0" step="1" value="25"></label>
+          <label for="flR"><span class="ar">رفضوا المشاركة</span><span class="en">Declined to participate</span><input id="flR" type="number" min="0" step="1" value="35"></label>
+          <label for="flL"><span class="ar">بيانات ناقصة / انسحاب</span><span class="en">Incomplete data / withdrew</span><input id="flL" type="number" min="0" step="1" value="12"></label>
+        </div>
+        <div class="out" id="flOut"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RANDOM NUMBERS ============ -->
+<section class="view" id="v-random" hidden>
+  <div class="vhead">
+    <h2><span class="ar">جدول الأرقام العشوائية والسحب من قائمة</span><span class="en">Random number table and selection from a list</span></h2>
+    <p><span class="ar">كل أداة هنا تستخدم بذرة عشوائية (seed). البذرة نفسها تعطي النتيجة نفسها دائماً، فاكتبها في المنهجية ليتمكن غيرك من إعادة السحب والتحقق منه.</span>
+       <span class="en">Every tool here uses a random seed. The same seed always reproduces the same result, so record it in the methods to make the selection auditable.</span></p>
+  </div>
+  <div class="panel">
+    <h3><span class="ar">جدول الأرقام العشوائية التفاعلي</span><span class="en">Interactive random number table</span></h3>
+    <div class="split">
+      <ol class="steps ar">
+        <li>رقّم الإطار من 1 إلى N. عدد الأرقام التي تُقرأ كل مرة = عدد خانات N (مثلاً 700 ⇒ 3 خانات).</li>
+        <li>اختر نقطة بداية (صف وعمود) بشكل عشوائي، ثم اقرأ بالاتجاه نفسه دون تغيير.</li>
+        <li>اقبل الرقم إذا كان بين 1 و N، وتجاوز الأكبر من N أو الصفر أو المكرر.</li>
+        <li>استمر حتى تحصل على n رقماً مقبولاً.</li>
+      </ol>
+      <ol class="steps en">
+        <li>Number the frame 1 to N. Digits read each time = number of digits in N (e.g., 700 ⇒ 3 digits).</li>
+        <li>Choose a random starting point (row, column) and keep reading in the same direction.</li>
+        <li>Accept a number if it is between 1 and N; skip numbers above N, zero, or repeats.</li>
+        <li>Continue until n numbers are accepted.</li>
+      </ol>
+      <div class="col">
+        <div class="fields">
+          <label for="rtN"><span class="ar">حجم المجتمع N</span><span class="en">Population N</span><input id="rtN" type="number" min="1" step="1" value="700"></label>
+          <label for="rtn"><span class="ar">حجم العينة n</span><span class="en">Sample n</span><input id="rtn" type="number" min="1" step="1" value="10"></label>
+          <label for="rtRow"><span class="ar">صف البداية</span><span class="en">Start row</span><input id="rtRow" type="number" min="1" step="1" value="3"></label>
+          <label for="rtCol"><span class="ar">عمود البداية</span><span class="en">Start column</span><input id="rtCol" type="number" min="1" max="10" step="1" value="2"></label>
+          <label for="rtSeed"><span class="ar">البذرة</span><span class="en">Seed</span><input id="rtSeed" type="number" step="1" value="2026"></label>
+        </div>
+        <div class="row"><button type="button" class="btn" id="rtBtn"><span class="ar">جدول جديد</span><span class="en">New table</span></button></div>
+      </div>
+    </div>
+    <div class="legend"><span class="lg acc"></span><span class="ar">مقبول</span><span class="en">Accepted</span>
+      <span class="lg rej"></span><span class="ar">خارج المدى</span><span class="en">Out of range</span>
+      <span class="lg dup"></span><span class="ar">مكرر</span><span class="en">Repeat</span></div>
+    <div class="tablewrap"><table class="rnt" id="rtTable"></table></div>
+    <div class="out" id="rtOut"></div>
+  </div>
+  <div class="panel">
+    <h3><span class="ar">سحب عينة عشوائية بسيطة من قائمة أسماء أو أرقام ملفات</span><span class="en">Simple random sample from a list of names or record numbers</span></h3>
+    <div class="split">
+      <label for="lsText"><span class="ar">ضع عنصراً واحداً في كل سطر (أمثلة محمّلة)</span><span class="en">One entry per line (example entries loaded)</span>
+        <textarea id="lsText" rows="10"></textarea></label>
+      <div class="col">
+        <div class="fields">
+          <label for="lsn"><span class="ar">حجم العينة n</span><span class="en">Sample n</span><input id="lsn" type="number" min="1" step="1" value="8"></label>
+          <label for="lsSeed"><span class="ar">البذرة</span><span class="en">Seed</span><input id="lsSeed" type="number" step="1" value="4417"></label>
+        </div>
+        <div class="row"><button type="button" class="btn" id="lsBtn"><span class="ar">اسحب ببذرة جديدة</span><span class="en">Draw with a new seed</span></button>
+          <button type="button" class="btn ghost" id="lsCopy"><span class="ar">نسخ النتيجة</span><span class="en">Copy result</span></button></div>
+        <div class="out" id="lsOut"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SAMPLE SIZE ============ -->
+<section class="view" id="v-size" hidden>
+  <div class="vhead">
+    <h2><span class="ar">حساب حجم العينة</span><span class="en">Sample size calculation</span></h2>
+    <p><span class="ar">لتقدير نسبة أو متوسط في دراسة مقطعية وصفية. الصيغ وفق Daniel &amp; Cross، القسمان 6.7 و6.8.</span>
+       <span class="en">For estimating a proportion or a mean in a descriptive cross-sectional study. Formulas follow Daniel &amp; Cross, Sections 6.7–6.8.</span></p>
+  </div>
+  <div class="split">
+    <div class="col">
+      <div class="panel">
+        <h3><span class="ar">المعادلات</span><span class="en">Formulas</span></h3>
+        <div class="fx"><span class="lbl"><span class="ar">1. لتقدير نسبة (Daniel 6.8.1)</span><span class="en">1. Estimating a proportion (Daniel 6.8.1)</span></span>n₀ = z² · p · (1 − p) / d²</div>
+        <div class="fx"><span class="lbl"><span class="ar">2. لتقدير متوسط (Daniel 6.7.3)</span><span class="en">2. Estimating a mean (Daniel 6.7.3)</span></span>n₀ = z² · σ² / d²</div>
+        <div class="fx"><span class="lbl"><span class="ar">3. تصحيح المجتمع المحدود عند n₀/N &gt; 0.05 (Daniel 6.8.2 و6.7.5، بصيغة مكافئة جبرياً)</span><span class="en">3. Finite population correction when n₀/N &gt; 0.05 (Daniel 6.8.2 and 6.7.5, algebraically equivalent form)</span></span>n = N z²pq / [d²(N − 1) + z²pq] = n₀ / (1 + (n₀ − 1) / N)</div>
+        <div class="fx"><span class="lbl"><span class="ar">4. معامل التصميم للمعاينة العنقودية</span><span class="en">4. Design effect for cluster designs</span></span>n_c = n × DEFF</div>
+        <div class="fx"><span class="lbl"><span class="ar">5. تعويض عدم الاستجابة r</span><span class="en">5. Inflate for nonresponse r</span></span>n_final = n_c / (1 − r)</div>
+        <dl class="where">
+          <dt>z</dt><dd><span class="ar">القيمة المعيارية: 1.645 (90%)، 1.96 (95%)، 2.576 (99%)</span><span class="en">Standard normal value: 1.645 (90%), 1.96 (95%), 2.576 (99%)</span></dd>
+          <dt>p</dt><dd><span class="ar">النسبة المتوقعة من دراسة سابقة أو تجريبية؛ إن لم تتوفر استخدم 0.5</span><span class="en">Expected proportion from prior or pilot data; use 0.5 if unknown</span></dd>
+          <dt>σ</dt><dd><span class="ar">الانحراف المعياري المتوقع من دراسة تجريبية أو سابقة؛ للبيانات الطبيعية تقريباً σ ≈ المدى ÷ 6 (Daniel)</span><span class="en">Expected SD from a pilot or previous study; for approximately normal data σ ≈ range ÷ 6 (Daniel)</span></dd>
+          <dt>d</dt><dd><span class="ar">الدقة المطلقة (نصف عرض فترة الثقة) بوحدة المؤشر نفسها</span><span class="en">Absolute precision (half-width of the CI) in the indicator's units</span></dd>
+          <dt>N</dt><dd><span class="ar">حجم المجتمع (اختياري)</span><span class="en">Population size (optional)</span></dd>
+        </dl>
+      </div>
+      <div class="panel">
+        <h3><span class="ar">دليل العمل</span><span class="en">Working guide</span></h3>
+        <ol class="steps ar">
+          <li>حدد المؤشر الرئيسي: نسبة (انتشار) أم متوسط.</li>
+          <li>استخرج p أو σ من دراسة منشورة مشابهة، واذكر المصدر في المنهجية.</li>
+          <li>اختر الدقة d. الشائع d = 0.05 للانتشار بين 10% و90%؛ وللانتشار الأقل من 10% تُجعل d نحو نصف p (Naing وآخرون، 2006).</li>
+          <li>طبق الصيغة الأساسية، ثم تصحيح المجتمع المحدود إن لزم.</li>
+          <li>اضرب في معامل التصميم إن كانت المعاينة عنقودية.</li>
+          <li>زد الحجم لتعويض عدم الاستجابة، وقرّب الناتج النهائي للأعلى دائماً.</li><li>الصيغة تقريب طبيعي (Wald)؛ إذا كانت p قريبة من 0 أو 1 فالأدق استخدام طرق Wilson أو الدقيقة.</li>
+        </ol>
+        <ol class="steps en">
+          <li>Identify the primary indicator: a proportion (prevalence) or a mean.</li>
+          <li>Take p or σ from a comparable published study and cite it in the methods.</li>
+          <li>Choose precision d. d = 0.05 is common for prevalence between 10% and 90%; below 10%, set d to about half of p (Naing et al., 2006).</li>
+          <li>Apply the basic formula, then the finite population correction if needed.</li>
+          <li>Multiply by the design effect if sampling is clustered.</li>
+          <li>Inflate for nonresponse and always round the final result up.</li><li>The formula relies on the normal (Wald) approximation; when p is near 0 or 1, Wilson or exact methods are more accurate.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="col">
+      <div class="panel">
+        <h3><span class="ar">الحاسبة</span><span class="en">Calculator</span></h3>
+        <div class="fields">
+          <label for="ssType"><span class="ar">نوع المؤشر</span><span class="en">Indicator</span>
+            <select id="ssType"><option value="p">p</option><option value="m">mean</option></select></label>
+          <label for="ssConf"><span class="ar">مستوى الثقة</span><span class="en">Confidence level</span>
+            <select id="ssConf"><option value="1.645">90%</option><option value="1.96" selected>95%</option><option value="2.576">99%</option></select></label>
+          <label for="ssP" class="fP"><span class="ar">النسبة المتوقعة p</span><span class="en">Expected proportion p</span><input id="ssP" type="number" step="0.01" value="0.30"></label>
+          <label for="ssSd" class="fM" hidden><span class="ar">الانحراف المعياري σ</span><span class="en">Standard deviation σ</span><input id="ssSd" type="number" step="0.1" value="15"></label>
+          <label for="ssD"><span class="ar">الدقة d</span><span class="en">Precision d</span><input id="ssD" type="number" step="0.01" value="0.05"></label>
+          <label for="ssN"><span class="ar">حجم المجتمع N (اختياري)</span><span class="en">Population N (optional)</span><input id="ssN" type="number" step="1" value=""></label>
+          <label for="ssDeff"><span class="ar">معامل التصميم DEFF</span><span class="en">Design effect DEFF</span><input id="ssDeff" type="number" step="0.1" value="1"></label>
+          <label for="ssNr"><span class="ar">عدم الاستجابة المتوقع %</span><span class="en">Expected nonresponse %</span><input id="ssNr" type="number" step="1" value="10"></label>
+        </div>
+        <div class="out" id="ssOut"></div>
+        <p class="muted" style="margin-top:10px"><span class="ar">مثال محمل: انتشار فقر الدم بين الحوامل متوقع 30%، دقة ±5%. للمتوسط جرّب ضغط الدم الانقباضي σ = 15 ملم زئبق، d = 3.</span>
+          <span class="en">Loaded example: expected anaemia prevalence in pregnant women 30%, precision ±5%. For a mean, try systolic BP with σ = 15 mmHg, d = 3.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SRS ============ -->
+<section class="view" id="v-srs" hidden>
+  <div class="vhead">
+    <h2><span class="ar">العينة العشوائية البسيطة</span><span class="en">Simple random sampling</span> <span class="gl">(SRS)</span></h2>
+    <p><span class="ar">لكل وحدة في الإطار احتمال الاختيار نفسه، ولكل مجموعة ممكنة بحجم n الاحتمال نفسه.</span>
+       <span class="en">Every unit in the frame has the same probability of selection, and every possible set of n units is equally likely.</span></p>
+  </div>
+  <div class="split">
+    <div class="col">
+      <div class="panel">
+        <h3><span class="ar">كيف تُنفذ</span><span class="en">How to do it</span></h3>
+        <ol class="steps ar">
+          <li>جهز إطاراً كاملاً بلا تكرار (مثلاً سجل مرضى السكري في المركز).</li>
+          <li>رقّم الوحدات تسلسلياً من 1 إلى N.</li>
+          <li>اسحب n رقماً مختلفاً بجدول الأرقام العشوائية أو بالحاسوب (الأداة المجاورة، أو =RANDBETWEEN في Excel مع حذف المكرر).</li>
+          <li>طابق الأرقام المسحوبة مع الإطار واجمع البيانات من أصحابها.</li>
+          <li>وثّق طريقة السحب، واستبدل غير المؤهلين بسحب جديد لا باختيار يدوي.</li>
+        </ol>
+        <ol class="steps en">
+          <li>Prepare a complete frame without duplicates (e.g., the centre's diabetes register).</li>
+          <li>Number the units consecutively from 1 to N.</li>
+          <li>Draw n distinct numbers with a random number table or a computer (the tool here, or Excel RANDBETWEEN with duplicates removed).</li>
+          <li>Match the numbers to the frame and collect data from those units.</li>
+          <li>Document the procedure; replace ineligible units by a new random draw, never by hand-picking.</li>
+        </ol>
+        <div class="fx"><span class="lbl"><span class="ar">احتمال اختيار كل وحدة</span><span class="en">Selection probability of each unit</span></span>P = n / N</div>
+        <div class="pcgrid">
+          <div class="pro"><h4><span class="ar">مزايا</span><span class="en">Strengths</span></h4><ul class="pc ar"><li>الأبسط نظرياً، وأساس جميع الصيغ الإحصائية</li><li>غير متحيزة</li></ul><ul class="pc en"><li>Simplest; basis of standard formulas</li><li>Unbiased</li></ul></div>
+          <div class="con"><h4><span class="ar">قيود</span><span class="en">Limitations</span></h4><ul class="pc ar"><li>تتطلب إطاراً كاملاً</li><li>قد لا تمثل المجموعات الصغيرة بالصدفة</li></ul><ul class="pc en"><li>Requires a complete frame</li><li>Small subgroups may be missed by chance</li></ul></div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="panel">
+        <h3><span class="ar">مولّد العينة</span><span class="en">Sample generator</span></h3>
+        <div class="fields">
+          <label for="srsN"><span class="ar">حجم المجتمع N</span><span class="en">Population size N</span><input id="srsN" type="number" min="1" step="1" value="700"></label>
+          <label for="srsn"><span class="ar">حجم العينة n</span><span class="en">Sample size n</span><input id="srsn" type="number" min="1" step="1" value="50"></label>
+        </div>
+        <div class="row"><button type="button" class="btn" id="srsBtn"><span class="ar">اسحب عينة جديدة</span><span class="en">Draw a new sample</span></button></div>
+        <div class="out" id="srsOut"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SYSTEMATIC ============ -->
+<section class="view" id="v-systematic" hidden>
+  <div class="vhead">
+    <h2><span class="ar">العينة العشوائية المنتظمة</span><span class="en">Systematic random sampling</span></h2>
+    <p><span class="ar">تُختار الوحدة الأولى عشوائياً، ثم كل k-ـية وحدة بعدها.</span>
+       <span class="en">The first unit is chosen at random, then every k-th unit after it.</span></p>
+  </div>
+  <div class="split">
+    <div class="col">
+      <div class="panel">
+        <h3><span class="ar">كيف تُنفذ</span><span class="en">How to do it</span></h3>
+        <div class="fx"><span class="lbl"><span class="ar">فاصل المعاينة</span><span class="en">Sampling interval</span></span>k = N / n</div>
+        <ol class="steps ar">
+          <li>احسب k. إذا كان عدداً صحيحاً اختر بداية عشوائية r بين 1 و k.</li>
+          <li>إذا لم يكن صحيحاً فتقريبه للأسفل يحرم آخر الإطار من أي فرصة. الحل: الفاصل الكسري (r عشوائي بين 0 و k، والوحدة = ⌈r + i·k⌉) أو المعاينة الدائرية (Cochran 1977؛ Lahiri 1952).</li>
+          <li>الوحدات المختارة: r، r + k، r + 2k ... حتى تكتمل n.</li>
+          <li>إذا لم يكن N معروفاً مسبقاً (مراجعو العيادة)، قدّره من سجلات الفترة السابقة نفسها.</li>
+          <li>افحص الإطار لوجود نمط دوري (أيام الأسبوع، ترتيب الأسرّة) قبل التطبيق.</li>
+        </ol>
+        <ol class="steps en">
+          <li>Compute k. If it is an integer, choose a random start r between 1 and k.</li>
+          <li>If not, rounding down gives the end of the frame zero chance of selection. Fix: a fractional interval (random r in (0, k], unit = ⌈r + i·k⌉) or circular systematic sampling (Cochran 1977; Lahiri 1952).</li>
+          <li>Selected units: r, r + k, r + 2k … until n is reached.</li>
+          <li>If N is not known in advance (clinic attendees), estimate it from records of an equivalent previous period.</li>
+          <li>Check the frame for periodicity (weekdays, bed order) before applying.</li>
+        </ol>
+        <p class="muted"><span class="ar">مثال: 700 ملف و n = 50 ⇒ k = 14. إذا كانت r = 6 فالمختار: 6، 20، 34، 48 ...</span>
+          <span class="en">Example: 700 files, n = 50 ⇒ k = 14. If r = 6, selected: 6, 20, 34, 48 …</span></p>
+        <div class="pcgrid">
+          <div class="pro"><h4><span class="ar">مزايا</span><span class="en">Strengths</span></h4><ul class="pc ar"><li>سهلة ميدانياً</li><li>تنتشر على كامل الإطار</li></ul><ul class="pc en"><li>Easy in the field</li><li>Spreads evenly across the frame</li></ul></div>
+          <div class="con"><h4><span class="ar">قيود</span><span class="en">Limitations</span></h4><ul class="pc ar"><li>تحيز مع الأنماط الدورية</li><li>لا توجد صيغة تباين دقيقة؛ تُحلل عادة كعشوائية بسيطة</li></ul><ul class="pc en"><li>Biased under periodicity</li><li>No exact variance formula; usually analysed as SRS</li></ul></div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="panel">
+        <h3><span class="ar">الحاسبة</span><span class="en">Calculator</span></h3>
+        <div class="fields">
+          <label for="sysN"><span class="ar">حجم المجتمع N</span><span class="en">Population size N</span><input id="sysN" type="number" min="1" step="1" value="700"></label>
+          <label for="sysn"><span class="ar">حجم العينة n</span><span class="en">Sample size n</span><input id="sysn" type="number" min="1" step="1" value="50"></label>
+        </div>
+        <div class="row"><button type="button" class="btn" id="sysBtn"><span class="ar">بداية عشوائية جديدة</span><span class="en">New random start</span></button></div>
+        <div class="out" id="sysOut"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STRATIFIED ============ -->
+<section class="view" id="v-stratified" hidden>
+  <div class="vhead">
+    <h2><span class="ar">العينة العشوائية الطبقية</span><span class="en">Stratified random sampling</span></h2>
+    <p><span class="ar">يُقسم المجتمع إلى طبقات غير متداخلة ومتجانسة داخلياً، ثم تُسحب عينة عشوائية مستقلة من كل طبقة.</span>
+       <span class="en">The population is divided into non-overlapping, internally homogeneous strata, and an independent random sample is drawn from each.</span></p>
+  </div>
+  <div class="split">
+    <div class="col">
+      <div class="panel">
+        <h3><span class="ar">كيف تُنفذ</span><span class="en">How to do it</span></h3>
+        <ol class="steps ar">
+          <li>اختر متغير التقسيم المرتبط بالنتيجة (القسم، الجنس، الريف/الحضر).</li>
+          <li>اعرف حجم كل طبقة Nₕ وجهز إطاراً منفصلاً لكل منها.</li>
+          <li>وزّع n على الطبقات: تناسبياً، أو بتوزيع نيمان إذا اختلف التباين بين الطبقات.</li>
+          <li>اسحب عينة عشوائية بسيطة أو منتظمة داخل كل طبقة.</li>
+          <li>في التوزيع غير التناسبي احسب أوزان التحليل wₕ = Nₕ / nₕ.</li>
+        </ol>
+        <ol class="steps en">
+          <li>Choose a stratifying variable related to the outcome (ward, sex, urban/rural).</li>
+          <li>Obtain each stratum size Nₕ and a separate frame for each.</li>
+          <li>Allocate n across strata: proportionally, or by Neyman allocation if variability differs.</li>
+          <li>Draw an SRS or systematic sample within each stratum.</li>
+          <li>With non-proportional allocation, compute analysis weights wₕ = Nₕ / nₕ.</li>
+        </ol>
+        <div class="fx"><span class="lbl"><span class="ar">التوزيع التناسبي</span><span class="en">Proportional allocation</span></span>nₕ = n × Nₕ / N</div>
+        <div class="fx"><span class="lbl"><span class="ar">توزيع نيمان (الأمثل)</span><span class="en">Neyman (optimal) allocation</span></span>nₕ = n × NₕSₕ / Σ(NₕSₕ)</div>
+        <dl class="where">
+          <dt>Nₕ</dt><dd><span class="ar">حجم الطبقة h</span><span class="en">Size of stratum h</span></dd>
+          <dt>Sₕ</dt><dd><span class="ar">الانحراف المعياري للمتغير داخل الطبقة h</span><span class="en">SD of the variable within stratum h</span></dd>
+        </dl>
+        <div class="pcgrid">
+          <div class="pro"><h4><span class="ar">مزايا</span><span class="en">Strengths</span></h4><ul class="pc ar"><li>تضمن تمثيل كل طبقة</li><li>دقة أعلى من البسيطة بالحجم نفسه</li></ul><ul class="pc en"><li>Guarantees each stratum is represented</li><li>More precise than SRS for the same n</li></ul></div>
+          <div class="con"><h4><span class="ar">قيود</span><span class="en">Limitations</span></h4><ul class="pc ar"><li>تتطلب معلومات مسبقة عن كل طبقة</li><li>أوزان التحليل في التوزيع غير التناسبي</li></ul><ul class="pc en"><li>Needs prior information on every stratum</li><li>Weights required under non-proportional allocation</li></ul></div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="panel">
+        <h3><span class="ar">حاسبة توزيع العينة</span><span class="en">Allocation calculator</span></h3>
+        <div class="fields">
+          <label for="stn"><span class="ar">حجم العينة الكلي n</span><span class="en">Total sample size n</span><input id="stn" type="number" min="1" step="1" value="70"></label>
+          <label for="stMode"><span class="ar">طريقة التوزيع</span><span class="en">Allocation</span>
+            <select id="stMode"><option value="prop">Proportional</option><option value="ney">Neyman</option></select></label>
+        </div>
+        <div class="tablewrap"><table class="ed noS" id="stTable">
+          <thead><tr><th><span class="ar">الطبقة</span><span class="en">Stratum</span></th><th>Nₕ</th><th class="colS">Sₕ</th>
+            <th><span class="ar">الوزن</span><span class="en">Weight</span></th><th><span class="ar">nₕ الدقيق</span><span class="en">Exact nₕ</span></th>
+            <th><span class="ar">nₕ المقرّب</span><span class="en">Rounded nₕ</span></th><th>nₕ/Nₕ</th><th></th></tr></thead>
+          <tbody id="stBody"></tbody>
+          <tfoot><tr><td><span class="ar">المجموع</span><span class="en">Total</span></td><td class="num" id="stNt"></td><td class="colS"></td><td class="num" id="stWt"></td><td class="num" id="stEt"></td><td class="num" id="stRt"></td><td class="num" id="stFt"></td><td></td></tr></tfoot>
+        </table></div>
+        <div class="row"><button type="button" class="btn ghost" id="stAdd"><span class="ar">أضف طبقة</span><span class="en">Add stratum</span></button></div>
+        <div class="out" id="stOut"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLUSTER ============ -->
+<section class="view" id="v-cluster" hidden>
+  <div class="vhead">
+    <h2><span class="ar">العينة العنقودية</span><span class="en">Cluster sampling</span></h2>
+    <p><span class="ar">وحدة السحب مجموعة طبيعية (مدرسة، قرية، مركز صحي) بدلاً من الفرد. مناسبة حين لا تتوفر قائمة بالأفراد.</span>
+       <span class="en">The unit of selection is a natural group (school, village, health centre) rather than an individual. Useful when no list of individuals exists.</span></p>
+  </div>
+  <div class="split">
+    <div class="col">
+      <div class="panel">
+        <h3><span class="ar">كيف تُنفذ</span><span class="en">How to do it</span></h3>
+        <ol class="steps ar">
+          <li>عرّف العنقود وجهز قائمة بجميع العناقيد في منطقة الدراسة.</li>
+          <li>احسب n كما في العينة البسيطة، ثم اضربه في معامل التصميم.</li>
+          <li>حدد عدد العناقيد المطلوب = n المصحح ÷ عدد الأفراد في العنقود.</li>
+          <li>اسحب العناقيد عشوائياً (أو بالتناسب مع الحجم إذا تفاوتت أحجامها؛ انظر متعددة المراحل).</li>
+          <li>مرحلة واحدة: ادرس جميع أفراد العنقود. مرحلتان: اسحب عدداً ثابتاً منهم.</li>
+          <li>في التحليل استخدم أخطاء معيارية تراعي العنقودية (svy في Stata، complex samples في SPSS).</li>
+        </ol>
+        <ol class="steps en">
+          <li>Define the cluster and list all clusters in the study area.</li>
+          <li>Compute n as for SRS, then multiply by the design effect.</li>
+          <li>Number of clusters = adjusted n ÷ individuals per cluster.</li>
+          <li>Select clusters at random (or with probability proportional to size if sizes vary; see Multistage).</li>
+          <li>One-stage: study everyone in the cluster. Two-stage: subsample a fixed number.</li>
+          <li>Analyse with cluster-robust standard errors (svy in Stata, Complex Samples in SPSS).</li>
+        </ol>
+        <div class="fx"><span class="lbl"><span class="ar">معامل التصميم</span><span class="en">Design effect</span></span>DEFF = 1 + (m − 1) × ICC</div>
+        <div class="fx"><span class="lbl"><span class="ar">عدد العناقيد المطلوب</span><span class="en">Clusters required</span></span>c = ⌈ n × DEFF / m ⌉</div>
+        <dl class="where">
+          <dt>m</dt><dd><span class="ar">عدد الأفراد المدروسين في كل عنقود</span><span class="en">Individuals studied per cluster</span></dd>
+          <dt>ICC</dt><dd><span class="ar">معامل الارتباط داخل العنقود؛ يؤخذ من مسوح سابقة للمؤشر نفسه</span><span class="en">Intracluster correlation; taken from previous surveys of the same indicator</span></dd>
+        </dl>
+        <p class="muted"><span class="ar">الصيغة (Kish) تفترض تساوي أحجام العناقيد. إذا تفاوتت فالأدق DEFF = 1 + [(1 + CV²) m̄ − 1] × ICC، حيث CV معامل اختلاف حجم العنقود (Eldridge وآخرون، 2006). إن لم يتوفر ICC فقد افترضت مسوح التلقيح الكلاسيكية (30×7) DEFF = 2، ويُذكر ذلك كقيد.</span>
+          <span class="en">The (Kish) formula assumes equal cluster sizes. With unequal sizes, use DEFF = 1 + [(1 + CV²) m̄ − 1] × ICC, where CV is the coefficient of variation of cluster size (Eldridge et al., 2006). Without an ICC, classic 30×7 immunization surveys assumed DEFF = 2; state this as a limitation.</span></p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="panel">
+        <h3><span class="ar">حاسبة معامل التصميم وعدد العناقيد</span><span class="en">Design effect and cluster calculator</span></h3>
+        <div class="fields">
+          <label for="clN"><span class="ar">n للعينة البسيطة</span><span class="en">n under SRS</span><input id="clN" type="number" min="1" step="1" value="323"></label>
+          <label for="clM"><span class="ar">الأفراد في العنقود m</span><span class="en">Per cluster m</span><input id="clM" type="number" min="1" step="1" value="20"></label>
+          <label for="clIcc">ICC<input id="clIcc" type="number" min="0" max="1" step="0.01" value="0.05"></label>
+        </div>
+        <div class="out" id="clOut"></div>
+      </div>
+      <div class="panel">
+        <h3><span class="ar">سحب العناقيد عشوائياً</span><span class="en">Random selection of clusters</span></h3>
+        <div class="fields">
+          <label for="clTot"><span class="ar">عدد العناقيد في الإطار</span><span class="en">Clusters in frame</span><input id="clTot" type="number" min="1" step="1" value="120"></label>
+          <label for="clSel"><span class="ar">العناقيد المطلوبة</span><span class="en">Clusters to select</span><input id="clSel" type="number" min="1" step="1" value="32"></label>
+        </div>
+        <div class="row"><button type="button" class="btn" id="clBtn"><span class="ar">اسحب العناقيد</span><span class="en">Draw clusters</span></button></div>
+        <div class="out" id="clSelOut"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MULTISTAGE ============ -->
+<section class="view" id="v-multistage" hidden>
+  <div class="vhead">
+    <h2><span class="ar">العينة متعددة المراحل مع الاحتمال المتناسب مع الحجم</span><span class="en">Multistage sampling with probability proportional to size</span> <span class="gl">(PPS)</span></h2>
+    <p><span class="ar">تُسحب الوحدات الأولية (مراكز، أحياء) باحتمال يتناسب مع حجمها، ثم عدد ثابت من الأفراد داخل كل منها، فتتساوى فرصة كل فرد في المجتمع.</span>
+       <span class="en">Primary units (centres, districts) are drawn with probability proportional to size, then a fixed number of individuals within each, giving every individual the same overall chance.</span></p>
+  </div>
+  <div class="split">
+    <div class="col">
+      <div class="panel">
+        <h3><span class="ar">كيف تُنفذ</span><span class="en">How to do it</span></h3>
+        <ol class="steps ar">
+          <li>رتّب الوحدات الأولية مع حجم كل منها Mᵢ، واحسب المجموع التراكمي.</li>
+          <li>حدد عدد الوحدات الأولية a وعدد الأفراد b في كل منها (a × b = n المصحح).</li>
+          <li>احسب فاصل المعاينة SI = M ÷ a.</li>
+          <li>اختر رقماً عشوائياً R بين 1 و SI؛ نقاط السحب R، R + SI، R + 2SI ...</li>
+          <li>الوحدة المختارة هي التي يقع الرقم ضمن مداها التراكمي.</li>
+          <li>داخل كل وحدة مختارة اسحب b فرداً بطريقة عشوائية بسيطة أو منتظمة.</li>
+        </ol>
+        <ol class="steps en">
+          <li>List primary units with their sizes Mᵢ and compute the cumulative total.</li>
+          <li>Set the number of primary units a and individuals per unit b (a × b = adjusted n).</li>
+          <li>Compute the sampling interval SI = M ÷ a.</li>
+          <li>Pick a random number R between 1 and SI; selection points are R, R + SI, R + 2SI …</li>
+          <li>The unit selected is the one whose cumulative range contains the point.</li>
+          <li>Within each selected unit, draw b individuals by SRS or systematic sampling.</li>
+        </ol>
+        <div class="fx"><span class="lbl"><span class="ar">احتمال اختيار الفرد (ذاتي الترجيح)</span><span class="en">Individual selection probability (self-weighting)</span></span>P = (a · Mᵢ / M) × (b / Mᵢ) = a · b / M</div>
+        <p class="muted"><span class="ar">هذا التصميم أساس مسوح التلقيح العنقودية (WHO EPI) والمسوح الصحية الوطنية. الوحدة الأكبر من SI قد تُسحب مرتين؛ تُعامل كوحدة مؤكدة.</span>
+          <span class="en">This design underlies WHO EPI cluster surveys and national health surveys. A unit larger than SI can be hit twice; treat it as a certainty unit.</span></p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="panel">
+        <h3><span class="ar">أداة السحب PPS</span><span class="en">PPS selection tool</span></h3>
+        <div class="fields">
+          <label for="ppsA"><span class="ar">الوحدات الأولية المطلوبة a</span><span class="en">Primary units a</span><input id="ppsA" type="number" min="1" step="1" value="4"></label>
+          <label for="ppsB"><span class="ar">الأفراد في كل وحدة b</span><span class="en">Individuals per unit b</span><input id="ppsB" type="number" min="1" step="1" value="15"></label>
+        </div>
+        <div class="tablewrap"><table class="ed">
+          <thead><tr><th><span class="ar">الوحدة</span><span class="en">Unit</span></th><th><span class="ar">الحجم Mᵢ</span><span class="en">Size Mᵢ</span></th>
+            <th><span class="ar">المدى التراكمي</span><span class="en">Cumulative range</span></th><th><span class="ar">مرات السحب</span><span class="en">Hits</span></th><th></th></tr></thead>
+          <tbody id="ppsBody"></tbody>
+          <tfoot><tr><td><span class="ar">المجموع M</span><span class="en">Total M</span></td><td class="num" id="ppsTot"></td><td></td><td class="num" id="ppsHits"></td><td></td></tr></tfoot>
+        </table></div>
+        <div class="row">
+          <button type="button" class="btn" id="ppsBtn"><span class="ar">رقم عشوائي جديد</span><span class="en">New random start</span></button>
+          <button type="button" class="btn ghost" id="ppsAdd"><span class="ar">أضف وحدة</span><span class="en">Add unit</span></button>
+        </div>
+        <div class="out" id="ppsOut"></div>
+        <p class="muted"><span class="ar">الأحجام المحملة أمثلة توضيحية لعشرة مراكز صحية، وليست بيانات حقيقية.</span>
+          <span class="en">Loaded sizes are illustrative examples for ten health centres, not real data.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NONPROBABILITY ============ -->
+<section class="view np" id="v-nonprob" hidden>
+  <div class="vhead">
+    <h2><span class="ar">العينات غير الاحتمالية</span><span class="en">Nonprobability sampling</span></h2>
+    <p><span class="ar">لا يُعرف احتمال اختيار كل وحدة، فلا يمكن تقدير خطأ المعاينة ولا تعميم النتائج إحصائياً. تُستخدم في الدراسات الاستكشافية والنوعية ومع الفئات التي يصعب الوصول إليها.</span>
+       <span class="en">The selection probability of each unit is unknown, so sampling error cannot be estimated and results cannot be generalized statistically. Used in exploratory and qualitative work and with hard-to-reach groups.</span></p>
+  </div>
+  <div class="mgrid">
+    <div class="panel">
+      <h3><span class="ar">الملائمة / المتاحة</span><span class="en">Convenience</span></h3>
+      <ol class="steps ar"><li>حدد مكان وفترة جمع البيانات (العيادة، القاعة).</li><li>ادعُ كل من يحقق معايير الاشتمال ويتوفر في تلك الفترة.</li><li>استمر حتى يكتمل الحجم المطلوب.</li><li>صِف بدقة من شارك ومن رفض لتقييم التحيز.</li></ol>
+      <ol class="steps en"><li>Fix the setting and data-collection period (clinic, lecture hall).</li><li>Invite everyone eligible and available during that period.</li><li>Continue until the target size is reached.</li><li>Describe participants and refusals precisely to assess bias.</li></ol>
+      <p class="muted"><span class="ar">تحسين عملي: اجعلها <b>متتابعة</b> (كل مراجع مؤهل بالتسلسل) بدل الاختيار حسب المزاج.</span><span class="en">Practical improvement: make it <b>consecutive</b> (every eligible attendee in sequence) rather than ad hoc.</span></p>
+    </div>
+    <div class="panel">
+      <h3><span class="ar">الغرضية / الحكمية</span><span class="en">Purposive (judgmental)</span></h3>
+      <ol class="steps ar"><li>حدد الخصائص التي يحتاجها السؤال البحثي.</li><li>اختر النوع: أقصى تنوع، حالة نموذجية، حالات متطرفة، خبراء.</li><li>اختر المشاركين بناء على هذه المعايير المكتوبة مسبقاً.</li><li>في البحوث النوعية توقف عند التشبع (لا معلومات جديدة).</li></ol>
+      <ol class="steps en"><li>Specify the characteristics the research question needs.</li><li>Pick a strategy: maximum variation, typical case, extreme case, expert.</li><li>Select participants against these pre-written criteria.</li><li>In qualitative work, stop at saturation (no new information).</li></ol>
+    </div>
+    <div class="panel">
+      <h3><span class="ar">كرة الثلج</span><span class="en">Snowball</span></h3>
+      <ol class="steps ar"><li>ابدأ بعدد قليل من المشاركين الأوائل (البذور) من مواقع مختلفة.</li><li>اطلب من كل مشارك ترشيح آخرين يحققون المعايير.</li><li>سجّل سلسلة الإحالة (من رشّح من) وعدد الموجات.</li><li>نوّع البذور لتقليل تركز العينة في شبكة واحدة.</li></ol>
+      <ol class="steps en"><li>Start with a few initial participants (seeds) from different settings.</li><li>Ask each participant to refer others who meet the criteria.</li><li>Record the referral chain (who referred whom) and number of waves.</li><li>Diversify seeds to avoid the sample concentrating in one network.</li></ol>
+      <p class="muted"><span class="ar">نسختها المطورة: المعاينة الموجهة بالمستجيب (RDS)، تسمح بتقديرات موزونة تقريبية.</span><span class="en">Its refined form, respondent-driven sampling (RDS), allows approximately weighted estimates.</span></p>
+    </div>
+    <div class="panel">
+      <h3><span class="ar">الحصصية</span><span class="en">Quota</span></h3>
+      <ol class="steps ar"><li>حدد متغيرات الحصة (العمر، الجنس) ونسبها في المجتمع.</li><li>احسب حصة كل فئة: nᵢ = n × Pᵢ.</li><li>اجمع البيانات حتى تمتلئ كل حصة.</li><li>تذكّر: الاختيار داخل الحصة غير عشوائي، وهذا ما يميزها عن الطبقية.</li></ol>
+      <ol class="steps en"><li>Choose quota variables (age, sex) and their population proportions.</li><li>Compute each quota: nᵢ = n × Pᵢ.</li><li>Recruit until every quota is filled.</li><li>Remember: selection within a quota is not random; that is what separates it from stratified sampling.</li></ol>
+    </div>
+  </div>
+  <div class="panel">
+    <h3><span class="ar">حاسبة الحصص</span><span class="en">Quota calculator</span></h3>
+    <div class="fields" style="max-width:340px">
+      <label for="qn"><span class="ar">حجم العينة n</span><span class="en">Sample size n</span><input id="qn" type="number" min="1" step="1" value="200"></label>
+    </div>
+    <div class="tablewrap"><table class="ed">
+      <thead><tr><th><span class="ar">الفئة</span><span class="en">Category</span></th><th><span class="ar">النسبة في المجتمع %</span><span class="en">Population %</span></th><th><span class="ar">الحصة</span><span class="en">Quota</span></th><th></th></tr></thead>
+      <tbody id="qBody"></tbody>
+      <tfoot><tr><td><span class="ar">المجموع</span><span class="en">Total</span></td><td class="num" id="qPt"></td><td class="num" id="qQt"></td><td></td></tr></tfoot>
+    </table></div>
+    <div class="row"><button type="button" class="btn ghost" id="qAdd"><span class="ar">أضف فئة</span><span class="en">Add category</span></button></div>
+    <div class="out" id="qOut"></div>
+  </div>
+  <div class="panel">
+    <h3><span class="ar">عند كتابة المنهجية</span><span class="en">When writing the methods</span></h3>
+    <ul class="pc ar"><li>سمِّ الطريقة باسمها الصحيح؛ لا تصف عينة ملائمة بأنها عشوائية.</li><li>اذكر مكان وفترة الاستقطاب ونسبة الرفض.</li><li>ناقش تحيز الاختيار كقيد، وتجنب تعميم الانتشار على المجتمع كله.</li></ul>
+    <ul class="pc en"><li>Name the method correctly; never describe a convenience sample as random.</li><li>State the recruitment setting, period and refusal rate.</li><li>Discuss selection bias as a limitation and avoid generalizing prevalence to the whole population.</li></ul>
+  </div>
+</section>
+
+<!-- ============ ERROR SIMULATOR ============ -->
+<section class="view" id="v-errors" hidden>
+  <div class="vhead">
+    <h2><span class="ar">خطأ المعاينة مقابل الأخطاء غير المتعلقة بالمعاينة</span><span class="en">Sampling error versus non-sampling error</span></h2>
+    <p><span class="ar">المحاكي يسحب 500 عينة متكررة من المجتمع نفسه ويرسم توزيع التقديرات. خطأ المعاينة يظهر كتشتت حول القيمة المتوقعة ويقل بزيادة n. الخطأ غير المتعلق بالمعاينة يظهر كإزاحة (تحيز) لا تختفي مهما زاد n.</span>
+       <span class="en">The simulator draws 500 repeated samples from the same population and plots the estimates. Sampling error appears as spread around the expected value and shrinks as n grows. Non-sampling error appears as a shift (bias) that does not disappear however large n becomes.</span></p>
+  </div>
+  <div class="split">
+    <div class="col">
+      <div class="panel">
+        <h3><span class="ar">إعدادات المحاكاة</span><span class="en">Simulation settings</span></h3>
+        <p class="muted"><span class="ar">المؤشر: انتشار ارتفاع ضغط الدم بين البالغين.</span><span class="en">Indicator: prevalence of hypertension among adults.</span></p>
+        <div class="presets">
+          <button type="button" class="btn ghost" data-pre="clean"><span class="ar">خطأ معاينة فقط</span><span class="en">Sampling error only</span></button>
+          <button type="button" class="btn ghost" data-pre="nr"><span class="ar">تحيز عدم الاستجابة</span><span class="en">Nonresponse bias</span></button>
+          <button type="button" class="btn ghost" data-pre="meas"><span class="ar">خطأ القياس</span><span class="en">Measurement error</span></button>
+        </div>
+        <div class="sliders">
+          <label for="erP"><span><span class="ar">الانتشار الحقيقي</span><span class="en">True prevalence</span> <b id="erPv"></b></span><input id="erP" type="range" min="5" max="60" step="1" value="30"></label>
+          <label for="erN"><span><span class="ar">حجم العينة n</span><span class="en">Sample size n</span> <b id="erNv"></b></span><input id="erN" type="range" min="30" max="2000" step="10" value="200"></label>
+          <label for="erR1"><span><span class="ar">استجابة المصابين</span><span class="en">Response among cases</span> <b id="erR1v"></b></span><input id="erR1" type="range" min="20" max="100" step="1" value="100"></label>
+          <label for="erR0"><span><span class="ar">استجابة غير المصابين</span><span class="en">Response among non-cases</span> <b id="erR0v"></b></span><input id="erR0" type="range" min="20" max="100" step="1" value="100"></label>
+          <label for="erSe"><span><span class="ar">حساسية أداة القياس</span><span class="en">Instrument sensitivity</span> <b id="erSev"></b></span><input id="erSe" type="range" min="50" max="100" step="1" value="100"></label>
+          <label for="erSp"><span><span class="ar">نوعية أداة القياس</span><span class="en">Instrument specificity</span> <b id="erSpv"></b></span><input id="erSp" type="range" min="50" max="100" step="1" value="100"></label>
+        </div>
+      </div>
+      <div class="panel">
+        <h3><span class="ar">أنواع الأخطاء</span><span class="en">Types of error</span></h3>
+        <div class="tablewrap" style="margin-top:0"><table class="cmp2">
+          <thead><tr><th><span class="ar">النوع</span><span class="en">Type</span></th><th><span class="ar">المصدر</span><span class="en">Source</span></th><th><span class="ar">يقل بزيادة n؟</span><span class="en">Falls with n?</span></th></tr></thead>
+          <tbody>
+            <tr><td><span class="ar">خطأ المعاينة</span><span class="en">Sampling error</span></td><td><span class="ar">الصدفة في اختيار الأفراد</span><span class="en">Chance in who is selected</span></td><td><span class="pill ok"><span class="ar">نعم</span><span class="en">Yes</span></span></td></tr>
+            <tr><td><span class="ar">خطأ التغطية</span><span class="en">Coverage error</span></td><td><span class="ar">إطار ناقص أو غير محدث</span><span class="en">Incomplete or outdated frame</span></td><td><span class="pill no"><span class="ar">لا</span><span class="en">No</span></span></td></tr>
+            <tr><td><span class="ar">تحيز عدم الاستجابة</span><span class="en">Nonresponse bias</span></td><td><span class="ar">المستجيبون يختلفون عن غير المستجيبين</span><span class="en">Responders differ from non-responders</span></td><td><span class="pill no"><span class="ar">لا</span><span class="en">No</span></span></td></tr>
+            <tr><td><span class="ar">خطأ القياس</span><span class="en">Measurement error</span></td><td><span class="ar">أداة أو جهاز أو مقابل غير دقيق</span><span class="en">Inaccurate tool, device or interviewer</span></td><td><span class="pill no"><span class="ar">لا</span><span class="en">No</span></span></td></tr>
+            <tr><td><span class="ar">خطأ المعالجة</span><span class="en">Processing error</span></td><td><span class="ar">إدخال وترميز البيانات</span><span class="en">Data entry and coding</span></td><td><span class="pill no"><span class="ar">لا</span><span class="en">No</span></span></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="panel">
+        <h3><span class="ar">توزيع 500 تقدير</span><span class="en">Distribution of 500 estimates</span></h3>
+        <div class="legend"><span class="lg tru"></span><span class="ar">القيمة الحقيقية</span><span class="en">True value</span><span class="lg mea"></span><span class="ar">متوسط التقديرات</span><span class="en">Mean of estimates</span></div>
+        <div id="erChart" class="chart"></div>
+        <div class="out" id="erOut"></div>
+        <div class="row"><button type="button" class="btn ghost" id="erBtn"><span class="ar">أعد المحاكاة</span><span class="en">Run again</span></button></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><span class="ar">© 2026 جميع الحقوق محفوظة لـ Samplify Kinani | د. عباس الكناني - جامعة العين العراقية - كلية الطب - فرع طب المجتمع</span><span class="en">© 2026 All rights reserved to Samplify Kinani | Dr. Abbas Al-Kinani - Al-Ayn Iraqi University - College of Medicine - Department of Community Medicine</span></footer>
+</div>
+
+<script src="counter-config.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const L=()=>document.documentElement.lang;
+const t=(a,e)=>L()==='ar'?a:e;
+const num=v=>{const s=String(v).trim();return s===''?NaN:Number(s)};
+const isInt=x=>Number.isInteger(x);
+const f2=x=>(Math.round(x*100)/100).toFixed(2);
+const stat=(l,v,key)=>`<div class="stat${key?' key':''}"><span>${l}</span><b>${v}</b></div>`;
+const note=(h,c='')=>`<div class="note ${c}">${h}</div>`;
+const chips=(arr,mark)=>`<div class="chips">${arr.map(v=>`<span class="chip${v===mark?' start':''}">${v}</span>`).join('')}</div>`;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const newSeed=()=>1000+Math.floor(Math.random()*99000);
+function draw(N,n,rng=Math.random){const a=Array.from({length:N},(_,i)=>i+1);for(let i=0;i<n;i++){const j=i+Math.floor(rng()*(N-i));[a[i],a[j]]=[a[j],a[i]]}return a.slice(0,n).sort((x,y)=>x-y)}
+function alloc(n,w){const W=w.reduce((a,b)=>a+b,0);const ex=w.map(x=>n*x/W);const fl=ex.map(Math.floor);const left=n-fl.reduce((a,b)=>a+b,0);
+  ex.map((v,i)=>[v-fl[i],i]).sort((a,b)=>b[0]-a[0]).slice(0,left).forEach(([,i])=>fl[i]++);return{ex,fl,W}}
+function chkNn(N,n){if(!isInt(N)||!isInt(n)||N<1||n<1)return t('أدخل أعداداً صحيحة موجبة.','Enter positive whole numbers.');
+  if(n>N)return t('حجم العينة لا يمكن أن يتجاوز حجم المجتمع.','Sample size cannot exceed population size.');return''}
+const nameOf=r=>r.name??t(r.ar,r.en);
+
+/* ---- language & tabs ---- */
+function setLang(l){const h=document.documentElement;h.lang=l;h.dir=l==='ar'?'rtl':'ltr';
+  try{localStorage.setItem('samp-lang',l)}catch(e){}
+  ssType.options[0].text=t('نسبة (انتشار)','Proportion (prevalence)');ssType.options[1].text=t('متوسط','Mean');
+  stMode.options[0].text=t('تناسبي','Proportional');stMode.options[1].text=t('نيمان','Neyman');
+  renderAll()}
+const views=['overview','eligibility','size','random','srs','systematic','stratified','cluster','multistage','nonprob','errors'];
+function show(v){if(!views.includes(v))v='overview';
+  views.forEach(x=>$('v-'+x).hidden=x!==v);
+  document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.v===v?'true':'false'))}
+$('tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(!b)return;
+  if(location.hash!=='#'+b.dataset.v)location.hash=b.dataset.v;else show(b.dataset.v);
+  window.scrollTo({top:0,behavior:'smooth'})});
+window.addEventListener('hashchange',()=>show(location.hash.slice(1)));
+$('langBtn').onclick=()=>setLang(L()==='ar'?'en':'ar');
+
+/* ---- sample size ---- */
+function ss(){
+  const type=ssType.value,z=Number(ssConf.value),d=num(ssD.value),N=num(ssN.value),deff=num(ssDeff.value),nr=num(ssNr.value);
+  document.querySelector('.fP').hidden=type!=='p';document.querySelector('.fM').hidden=type!=='m';
+  const out=$('ssOut');let e='';
+  const p=num(ssP.value),sd=num(ssSd.value);
+  if(type==='p'&&!(p>0&&p<1))e=t('p يجب أن تكون بين 0 و 1 (مثلاً 0.30).','p must be between 0 and 1 (e.g., 0.30).');
+  else if(type==='p'&&!(d>0&&d<1))e=t('d للنسبة يكتب ككسر بين 0 و 1 (مثلاً 0.05).','For a proportion, d is a fraction between 0 and 1 (e.g., 0.05).');
+  else if(type==='m'&&!(sd>0))e=t('أدخل انحرافاً معيارياً موجباً.','Enter a positive SD.');
+  else if(type==='m'&&!(d>0))e=t('أدخل دقة موجبة.','Enter a positive precision.');
+  else if(!(deff>=1))e=t('معامل التصميم لا يقل عن 1.','Design effect must be at least 1.');
+  else if(!(nr>=0&&nr<100))e=t('نسبة عدم الاستجابة بين 0 و 99.','Nonresponse must be between 0 and 99.');
+  else if(ssN.value.trim()!==''&&!(isInt(N)&&N>1))e=t('N يجب أن يكون عدداً صحيحاً أكبر من 1، أو اتركه فارغاً.','N must be a whole number above 1, or leave it blank.');
+  if(e){out.innerHTML=note(e,'warn');return}
+  const lines=[];let n0;
+  if(type==='p'){n0=z*z*p*(1-p)/(d*d);lines.push(`n₀ = ${z}² × ${p} × ${f2(1-p)} / ${d}² = ${f2(n0)}`)}
+  else{n0=z*z*sd*sd/(d*d);lines.push(`n₀ = ${z}² × ${sd}² / ${d}² = ${f2(n0)}`)}
+  let n1=n0,fpc=false;
+  if(isInt(N)&&N>1){const fr=n0/N;if(fr>0.05){n1=n0/(1+(n0-1)/N);fpc=true;lines.push(`n = ${f2(n0)} / (1 + (${f2(n0)} − 1) / ${N}) = ${f2(n1)}`)}
+    else lines.push(`<span class="c">${t(`n₀/N = ${(fr*100).toFixed(1)}% ≤ 5%، لا حاجة لتصحيح المجتمع المحدود`,`n₀/N = ${(fr*100).toFixed(1)}% ≤ 5%; no finite population correction needed`)}</span>`)}
+  const n2=n1*deff;if(deff>1)lines.push(`n_c = ${f2(n1)} × ${deff} = ${f2(n2)}`);
+  const n3=n2/(1-nr/100);if(nr>0)lines.push(`n_final = ${f2(n2)} / (1 − ${nr/100}) = ${f2(n3)}`);
+  const fin=Math.ceil(n3-1e-9);
+  let h=`<div class="stats">${stat('n₀',Math.ceil(n0-1e-9))}${fpc?stat(t('بعد التصحيح','After FPC'),Math.ceil(n1-1e-9)):''}${deff>1?stat(t('بعد DEFF','After DEFF'),Math.ceil(n2-1e-9)):''}${stat(t('الحجم النهائي','Final sample size'),fin,true)}</div>`;
+  h+=`<div class="calc">${lines.map(l=>`<div>${l}</div>`).join('')}<div>⇒ ⌈${f2(n3)}⌉ = ${fin}</div></div>`;
+  if(type==='p'&&p<0.1&&d>=p/2)h+=note(t(`الدقة d = ${d} كبيرة مقارنة بـ p = ${p}؛ فترة الثقة قد تشمل الصفر. اجعل d أقل من ${f2(p/2)}.`,`Precision d = ${d} is large relative to p = ${p}; the CI could include zero. Use d below ${f2(p/2)}.`),'warn');
+  if(type==='p'&&p>=0.1&&d>p)h+=note(t('d أكبر من p نفسها، وهذا غير مقبول علمياً.','d exceeds p itself, which is not acceptable.'),'warn');
+  if(isInt(N)&&fin>N)h+=note(t('الحجم المطلوب يتجاوز المجتمع؛ ادرس المجتمع كاملاً (حصر شامل).','Required size exceeds the population; study everyone (census).'),'warn');
+  h+=note(t(`صياغة مقترحة للمنهجية: حُسب حجم العينة لتقدير ${type==='p'?`نسبة متوقعة ${p*100}%`:`متوسط بانحراف معياري ${sd}`} بدقة ±${type==='p'?d*100+'%':d} وثقة ${ssConf.selectedOptions[0].text}${deff>1?`، مع معامل تصميم ${deff}`:''}${nr>0?` وتعويض ${nr}% لعدم الاستجابة`:''}، فبلغ ${fin} مشاركاً.`,
+    `Suggested methods wording: Sample size was calculated to estimate ${type==='p'?`an expected proportion of ${p*100}%`:`a mean with an SD of ${sd}`} with ±${type==='p'?d*100+'%':d} precision at ${ssConf.selectedOptions[0].text} confidence${deff>1?`, a design effect of ${deff}`:''}${nr>0?` and ${nr}% allowance for nonresponse`:''}, giving ${fin} participants.`),'ok');
+  out.innerHTML=h}
+['ssType','ssConf','ssP','ssSd','ssD','ssN','ssDeff','ssNr'].forEach(id=>{$(id).addEventListener('input',ss);$(id).addEventListener('change',ss)});
+$('ssType').addEventListener('change',()=>{ssD.value=ssType.value==='p'?'0.05':'3'});
+
+/* ---- SRS ---- */
+let srsS=null;
+function srs(redraw){const N=num(srsN.value),n=num(srsn.value),e=chkNn(N,n);
+  if(e){$('srsOut').innerHTML=note(e,'warn');return}
+  if(redraw||!srsS||srsS.N!==N||srsS.n!==n)srsS={N,n,s:draw(N,n)};
+  $('srsOut').innerHTML=`<div class="stats">${stat(t('كسر المعاينة n/N','Sampling fraction n/N'),(n/N).toFixed(3))}${stat(t('احتمال اختيار كل وحدة','Selection probability'),(n/N*100).toFixed(1)+'%')}</div>
+  ${note(t('أرقام الوحدات المختارة مرتبة تصاعدياً. كل سحب ينتج عينة مختلفة.','Selected unit numbers in ascending order. Each draw gives a different sample.'))}${chips(srsS.s)}`}
+$('srsBtn').onclick=()=>srs(true);['srsN','srsn'].forEach(id=>$(id).addEventListener('input',()=>srs(false)));
+
+/* ---- systematic ---- */
+let sysU=null;
+function sys(redraw){const N=num(sysN.value),n=num(sysn.value),e=chkNn(N,n);
+  if(e){$('sysOut').innerHTML=note(e,'warn');return}
+  const k=N/n,intK=isInt(k);
+  if(redraw||sysU===null)sysU=Math.random();
+  let r,s=[];
+  if(intK){r=1+Math.floor(sysU*k);for(let i=0;i<n;i++)s.push(r+i*k)}
+  else{r=Math.max(sysU*k,1e-9);for(let i=0;i<n;i++)s.push(Math.ceil(r+i*k-1e-9))}
+  const start=s[0];
+  let h=`<div class="stats">${stat('k = N / n',intK?k:f2(k),true)}${stat(t('البداية العشوائية r','Random start r'),intK?r:f2(r))}${stat(t('احتمال كل وحدة','Probability per unit'),(n/N).toFixed(3))}</div>`;
+  if(intK)h+=`<div class="calc"><div>k = ${N} / ${n} = ${k}</div><div>${t('الوحدات','units')}: ${r}, ${r}+${k}=${r+k}, ${r}+2×${k}=${r+2*k}, …</div></div>`;
+  else{const kf=Math.floor(k),lost=N-n*kf;
+    h+=`<div class="calc"><div>k = ${N} / ${n} = ${f2(k)} ${t('(ليس عدداً صحيحاً)','(not an integer)')}</div><div>r = ${f2(r)}  →  ${t('الوحدة','unit')} = ⌈r + i × ${f2(k)}⌉</div><div>${s.slice(0,4).join(', ')}, …</div></div>`;
+    h+=note(t(`لماذا لم يُقرّب k للأسفل؟ لو استُخدم k = ${kf} لكانت أكبر وحدة يمكن سحبها ${n*kf}، فتبقى الوحدات من ${n*kf+1} إلى ${N} (${lost} وحدة) بلا أي فرصة للاختيار، ولم تعد العينة احتمالية متساوية. الفاصل الكسري يعطي كل وحدة الاحتمال n/N نفسه ويسحب n بالضبط.`,
+      `Why not round k down? With k = ${kf}, the largest selectable unit would be ${n*kf}, so units ${n*kf+1}–${N} (${lost} units) would have zero chance and the design would no longer be equal-probability. The fractional interval gives every unit probability n/N and yields exactly n.`),'warn')}
+  h+=note(t('الوحدات المختارة، والبداية مميزة:','Selected units, start highlighted:'))+chips(s,start);
+  $('sysOut').innerHTML=h}
+$('sysBtn').onclick=()=>sys(true);['sysN','sysn'].forEach(id=>$(id).addEventListener('input',()=>sys(false)));
+
+/* ---- stratified ---- */
+const strata=[{ar:'العناية المركزة',en:'ICU',N:120,S:12},{ar:'الباطنية',en:'Internal medicine',N:300,S:8},{ar:'الجراحة',en:'Surgery',N:200,S:10},{ar:'الأطفال',en:'Paediatrics',N:80,S:6}];
+function stRender(){$('stBody').innerHTML=strata.map((s,i)=>`<tr>
+  <td><input id="sn${i}" value="${esc(nameOf(s))}" aria-label="name"></td>
+  <td><input id="sN${i}" type="number" min="0" step="1" value="${s.N}" aria-label="Nh"></td>
+  <td class="colS"><input id="sS${i}" type="number" min="0" step="0.1" value="${s.S}" aria-label="Sh"></td>
+  <td class="num" id="sw${i}"></td><td class="num" id="se${i}"></td><td class="num" id="sr${i}"></td><td class="num" id="sf${i}"></td>
+  <td>${strata.length>2?`<button type="button" class="x" data-del="${i}" aria-label="remove">×</button>`:''}</td></tr>`).join('');st()}
+function st(){const ney=stMode.value==='ney';$('stTable').classList.toggle('noS',!ney);
+  const n=num(stn.value),N=strata.reduce((a,s)=>a+(s.N||0),0);
+  let e=strata.some(s=>!isInt(s.N)||s.N<0)?t('أحجام الطبقات أعداد صحيحة غير سالبة.','Stratum sizes must be non-negative whole numbers.'):chkNn(N,n);
+  if(!e&&ney&&strata.some(s=>!(s.S>0)))e=t('توزيع نيمان يتطلب Sₕ موجباً لكل طبقة.','Neyman allocation needs a positive Sₕ for every stratum.');
+  const clear=()=>{['stNt','stWt','stEt','stRt','stFt'].forEach(x=>$(x).textContent='');strata.forEach((_,i)=>['sw','se','sr','sf'].forEach(p=>$(p+i).textContent=''))};
+  if(e){clear();$('stOut').innerHTML=note(e,'warn');return}
+  const w=strata.map(s=>ney?s.N*s.S:s.N),{ex,fl}=alloc(n,w);
+  strata.forEach((s,i)=>{$('sw'+i).textContent=(w[i]/w.reduce((a,b)=>a+b,0)).toFixed(3);$('se'+i).textContent=f2(ex[i]);$('sr'+i).textContent=fl[i];$('sf'+i).textContent=s.N?(fl[i]/s.N).toFixed(3):'–'});
+  $('stNt').textContent=N;$('stWt').textContent='1.000';$('stEt').textContent=f2(n);$('stRt').textContent=fl.reduce((a,b)=>a+b,0);$('stFt').textContent=(n/N).toFixed(3);
+  let h=`<div class="stats">${stat(t('كسر المعاينة الكلي','Overall fraction'),(n/N).toFixed(3))}${stat(t('عدد الطبقات','Strata'),strata.length)}</div>`;
+  const over=strata.filter((s,i)=>fl[i]>s.N).map(nameOf);
+  if(over.length)h+=note(t(`الحجم المخصص يتجاوز حجم الطبقة في: ${over.join('، ')}. خذها كاملة وأعد توزيع الباقي.`,`Allocation exceeds stratum size in: ${over.join(', ')}. Take it entirely and reallocate the remainder.`),'warn');
+  const small=strata.filter((s,i)=>fl[i]<2).map(nameOf);
+  if(small.length)h+=note(t(`الطبقات ${small.join('، ')} حصلت على أقل من وحدتين؛ لا يمكن تقدير التباين داخلها.`,`Strata ${small.join(', ')} received fewer than two units; within-stratum variance cannot be estimated.`),'warn');
+  h+=note(ney?t('في توزيع نيمان تختلف كسور المعاينة بين الطبقات، فيجب استخدام الأوزان wₕ = Nₕ/nₕ في التحليل.','Under Neyman allocation sampling fractions differ between strata, so weights wₕ = Nₕ/nₕ are required in analysis.')
+    :t('كسر المعاينة متساوٍ تقريباً في جميع الطبقات، فالعينة ذاتية الترجيح.','The sampling fraction is about equal across strata, so the sample is self-weighting.'));
+  $('stOut').innerHTML=h}
+$('stBody').addEventListener('input',e=>{const m=e.target.id.match(/^s([nNS])(\d+)$/);if(!m)return;const s=strata[+m[2]];
+  if(m[1]==='n')s.name=e.target.value;else s[m[1]]=num(e.target.value);st()});
+$('stBody').addEventListener('click',e=>{const d=e.target.dataset.del;if(d!==undefined){strata.splice(+d,1);stRender()}});
+$('stAdd').onclick=()=>{strata.push({ar:'طبقة '+(strata.length+1),en:'Stratum '+(strata.length+1),N:100,S:8});stRender()};
+stn.addEventListener('input',st);stMode.addEventListener('change',st);
+
+/* ---- cluster ---- */
+function cl(){const n=num(clN.value),m=num(clM.value),icc=num(clIcc.value);
+  if(!isInt(n)||!isInt(m)||n<1||m<1||!(icc>=0&&icc<=1)){$('clOut').innerHTML=note(t('أدخل n و m أعداداً صحيحة موجبة و ICC بين 0 و 1.','Enter whole positive n and m, and ICC between 0 and 1.'),'warn');return}
+  const deff=1+(m-1)*icc,nc=n*deff,c=Math.ceil(nc/m-1e-9);
+  $('clOut').innerHTML=`<div class="stats">${stat('DEFF',f2(deff))}${stat(t('n المصحح','Adjusted n'),Math.ceil(nc-1e-9))}${stat(t('العناقيد المطلوبة','Clusters needed'),c,true)}${stat(t('المجموع الفعلي','Total enrolled'),c*m)}</div>
+  <div class="calc"><div>DEFF = 1 + (${m} − 1) × ${icc} = ${f2(deff)}</div><div>n_c = ${n} × ${f2(deff)} = ${f2(nc)}</div><div>c = ⌈${f2(nc)} / ${m}⌉ = ${c}</div></div>
+  ${note(t(`العنقودية هنا تعادل في دقتها عينة بسيطة بحجم ${n} فقط رغم دراسة ${c*m} فرداً. تقليل m وزيادة عدد العناقيد يرفع الكفاءة.`,`Here ${c*m} clustered individuals give the precision of only ${n} under SRS. Fewer individuals per cluster and more clusters improve efficiency.`))}`;
+  if(!clTouched)clSel.value=c;clDraw(false)}
+let clTouched=false;
+let clS=null;
+function clDraw(redraw){const M=num(clTot.value),c=num(clSel.value),e=chkNn(M,c);
+  if(e){$('clSelOut').innerHTML=note(e,'warn');return}
+  if(redraw||!clS||clS.M!==M||clS.c!==c)clS={M,c,s:draw(M,c)};
+  $('clSelOut').innerHTML=note(t(`أرقام العناقيد المختارة (${c} من ${M}):`,`Selected cluster numbers (${c} of ${M}):`))+chips(clS.s)}
+['clN','clM','clIcc'].forEach(id=>$(id).addEventListener('input',cl));
+['clTot','clSel'].forEach(id=>$(id).addEventListener('input',()=>{if(id==='clSel')clTouched=true;clDraw(false)}));$('clBtn').onclick=()=>clDraw(true);
+
+/* ---- PPS ---- */
+const psu=[850,1200,430,2100,640,980,1560,300,720,1220].map((N,i)=>({ar:'مركز صحي '+(i+1),en:'PHC '+(i+1),N}));
+let ppsU=null;
+function ppsRender(){$('ppsBody').innerHTML=psu.map((p,i)=>`<tr id="pr${i}">
+  <td><input id="pn${i}" value="${esc(nameOf(p))}" aria-label="name"></td>
+  <td><input id="pN${i}" type="number" min="1" step="1" value="${p.N}" aria-label="size"></td>
+  <td class="num" id="pc${i}"></td><td class="num" id="ph${i}"></td>
+  <td>${psu.length>2?`<button type="button" class="x" data-del="${i}" aria-label="remove">×</button>`:''}</td></tr>`).join('');pps(false)}
+function pps(redraw){const a=num(ppsA.value),b=num(ppsB.value),M=psu.reduce((s,p)=>s+(p.N||0),0);
+  const clear=()=>psu.forEach((_,i)=>{$('pc'+i).textContent='';$('ph'+i).textContent='';$('pr'+i).classList.remove('hit')});
+  let e='';
+  if(psu.some(p=>!isInt(p.N)||p.N<1))e=t('أحجام الوحدات أعداد صحيحة موجبة.','Unit sizes must be positive whole numbers.');
+  else if(!isInt(a)||!isInt(b)||a<1||b<1)e=t('أدخل a و b أعداداً صحيحة موجبة.','Enter whole positive a and b.');
+  else if(a>psu.length)e=t('a أكبر من عدد الوحدات في القائمة.','a exceeds the number of listed units.');
+  if(e){clear();$('ppsTot').textContent=M||'';$('ppsHits').textContent='';$('ppsOut').innerHTML=note(e,'warn');return}
+  const SI=M/a;
+  if(redraw||ppsU===null)ppsU=Math.random();
+  const ppsR=Math.max(ppsU*SI,1e-9);
+  const pts=Array.from({length:a},(_,i)=>ppsR+i*SI);
+  let cum=0;const hits=psu.map(p=>{const lo=cum+1;cum+=p.N;return{lo,hi:cum,h:pts.filter(x=>Math.ceil(x-1e-9)>=lo&&Math.ceil(x-1e-9)<=cum).length}});
+  psu.forEach((p,i)=>{$('pc'+i).textContent=`${hits[i].lo}–${hits[i].hi}`;$('ph'+i).textContent=hits[i].h||'';$('pr'+i).classList.toggle('hit',hits[i].h>0)});
+  $('ppsTot').textContent=M;$('ppsHits').textContent=hits.reduce((s,x)=>s+x.h,0);
+  const big=psu.filter(p=>p.N>SI).map(nameOf),bInfeasible=psu.filter((p,i)=>hits[i].h&&p.N<b*hits[i].h).map(nameOf);
+  let h=`<div class="stats">${stat(t('الفاصل SI','Interval SI'),f2(SI))}${stat(t('الرقم العشوائي R','Random start R'),f2(ppsR))}${stat('n = a × b',a*b,true)}${stat(t('احتمال الفرد','Individual P'),(a*b/M).toFixed(4))}</div>`;
+  h+=`<div class="calc"><div>SI = ${M} / ${a} = ${f2(SI)}</div><div>R ~ U(0, ${f2(SI)}] = ${f2(ppsR)}</div><div>${t('نقاط السحب','Selection points')} ⌈R + i·SI⌉: ${pts.map(x=>Math.ceil(x-1e-9)).join(', ')}</div><div>P = ${a} × ${b} / ${M} = ${(a*b/M).toFixed(4)}</div></div>`;
+  if(big.length)h+=note(t(`${big.join('، ')} أكبر من الفاصل فقد تُسحب أكثر من مرة؛ اسحب عندها b عن كل مرة.`,`${big.join(', ')} exceed the interval and may be hit more than once; take b individuals per hit.`),'warn');
+  if(bInfeasible.length)h+=note(t(`حجم ${bInfeasible.join('، ')} أصغر من المطلوب سحبه منها.`,`${bInfeasible.join(', ')} is smaller than the number to be drawn from it.`),'warn');
+  h+=note(t('الصفوف المظللة هي الوحدات الأولية المختارة. الخطوة التالية: سحب b فرداً من كل منها بطريقة عشوائية بسيطة أو منتظمة.','Shaded rows are the selected primary units. Next: draw b individuals from each by SRS or systematic sampling.'));
+  $('ppsOut').innerHTML=h}
+$('ppsBody').addEventListener('input',e=>{const m=e.target.id.match(/^p([nN])(\d+)$/);if(!m)return;const p=psu[+m[2]];
+  if(m[1]==='n')p.name=e.target.value;else p.N=num(e.target.value);pps(false)});
+$('ppsBody').addEventListener('click',e=>{const d=e.target.dataset.del;if(d!==undefined){psu.splice(+d,1);ppsRender()}});
+$('ppsAdd').onclick=()=>{psu.push({ar:'وحدة '+(psu.length+1),en:'Unit '+(psu.length+1),N:500});ppsRender()};
+$('ppsBtn').onclick=()=>pps(true);['ppsA','ppsB'].forEach(id=>$(id).addEventListener('input',()=>pps(false)));
+
+/* ---- quota ---- */
+const quota=[{ar:'ذكور أقل من 40',en:'Male <40',P:30},{ar:'ذكور 40 فأكثر',en:'Male ≥40',P:19},{ar:'إناث أقل من 40',en:'Female <40',P:31},{ar:'إناث 40 فأكثر',en:'Female ≥40',P:20}];
+function qRender(){$('qBody').innerHTML=quota.map((q,i)=>`<tr><td><input id="qn${i}" value="${esc(nameOf(q))}" aria-label="name"></td>
+  <td><input id="qP${i}" type="number" min="0" step="0.1" value="${q.P}" aria-label="percent"></td><td class="num" id="qq${i}"></td>
+  <td>${quota.length>2?`<button type="button" class="x" data-del="${i}" aria-label="remove">×</button>`:''}</td></tr>`).join('');qc()}
+function qc(){const n=num(qn.value),tot=quota.reduce((s,q)=>s+(q.P||0),0);$('qPt').textContent=f2(tot);
+  if(!isInt(n)||n<1||quota.some(q=>!(q.P>=0))||tot<=0){quota.forEach((_,i)=>$('qq'+i).textContent='');$('qQt').textContent='';
+    $('qOut').innerHTML=note(t('أدخل n صحيحاً موجباً ونسباً غير سالبة.','Enter a positive whole n and non-negative percentages.'),'warn');return}
+  const {fl}=alloc(n,quota.map(q=>q.P));quota.forEach((_,i)=>$('qq'+i).textContent=fl[i]);$('qQt').textContent=fl.reduce((a,b)=>a+b,0);
+  $('qOut').innerHTML=Math.abs(tot-100)>0.05?note(t(`مجموع النسب ${f2(tot)}% وليس 100%؛ وُزعت الحصص نسبياً على المجموع المدخل.`,`Percentages sum to ${f2(tot)}%, not 100%; quotas were scaled to the entered total.`),'warn'):''}
+$('qBody').addEventListener('input',e=>{const m=e.target.id.match(/^q([nP])(\d+)$/);if(!m)return;const q=quota[+m[2]];
+  if(m[1]==='n')q.name=e.target.value;else q.P=num(e.target.value);qc()});
+$('qBody').addEventListener('click',e=>{const d=e.target.dataset.del;if(d!==undefined){quota.splice(+d,1);qRender()}});
+$('qAdd').onclick=()=>{quota.push({ar:'فئة '+(quota.length+1),en:'Category '+(quota.length+1),P:0});qRender()};qn.addEventListener('input',qc);
+
+/* ---- eligibility quiz ---- */
+const QZ=[
+ {ar:'الاشتمال: الحوامل المراجعات لعيادة رعاية الحوامل في المستشفى من كانون الثاني إلى آذار 2026.',en:'Inclusion: pregnant women attending the hospital antenatal clinic, January–March 2026.',a:'inc',
+  fa:'صحيح: يحدد المجتمع والمكان والفترة الزمنية.',fe:'Correct: it specifies population, setting and time period.'},
+ {ar:'الاستبعاد: النساء غير الحوامل.',en:'Exclusion: women who are not pregnant.',a:'bad',
+  fa:'خاطئ: هذا نفي لمعيار الاشتمال، وهن خارج المجتمع أصلاً.',fe:'Flawed: it is the negation of inclusion; these women are outside the population already.'},
+ {ar:'الاستبعاد: اضطراب معروف في الهيموغلوبين (مثل حمل صفة الثلاسيميا).',en:'Exclusion: known haemoglobinopathy (e.g., thalassaemia trait).',a:'exc',
+  fa:'صحيح: يشوه تفسير مؤشرات الدم ويخلط بين أسباب فقر الدم في دراسة تخص نقص الحديد.',fe:'Correct: it distorts haematological indices and confounds the cause of anaemia in an iron-deficiency study.'},
+ {ar:'الاشتمال: النساء اللواتي يبدين متعاونات.',en:'Inclusion: women who appear cooperative.',a:'bad',
+  fa:'خاطئ: معيار ذاتي غير قابل للقياس، ويفتح باب تحيز الاختيار.',fe:'Flawed: subjective and unmeasurable; it invites selection bias.'},
+ {ar:'الاستبعاد: من رفضت التوقيع على الموافقة المستنيرة.',en:'Exclusion: refused to sign informed consent.',a:'bad',
+  fa:'خاطئ: الرفض عدم مشاركة لا معيار استبعاد، ويُبلغ عنه في مخطط التدفق ضمن نسبة الاستجابة.',fe:'Flawed: refusal is nonparticipation, not an exclusion criterion; report it in the flow diagram as part of the response rate.'},
+ {ar:'الاستبعاد: نقل دم خلال الأشهر الثلاثة الماضية.',en:'Exclusion: blood transfusion within the past 3 months.',a:'exc',
+  fa:'صحيح: نقل الدم يغير الهيموغلوبين ومخازن الحديد فيفسد القياس.',fe:'Correct: transfusion alters haemoglobin and iron stores, invalidating the measurement.'}];
+const qAns=QZ.map(()=>null);
+const qOpt=[['inc','اشتمال صحيح','Valid inclusion'],['exc','استبعاد صحيح','Valid exclusion'],['bad','صياغة خاطئة','Flawed']];
+function quizRender(){
+  $('quiz').innerHTML=QZ.map((q,i)=>`<div class="qi"><p>${i+1}. ${t(q.ar,q.en)}</p><div class="qb">${qOpt.map(o=>{
+    let c='';if(qAns[i]!==null){if(o[0]===q.a)c='right';else if(o[0]===qAns[i])c='wrong'}
+    return `<button type="button" data-q="${i}" data-o="${o[0]}" class="${c}">${t(o[1],o[2])}</button>`}).join('')}</div>${qAns[i]!==null?`<div class="qf">${t(q.fa,q.fe)}</div>`:''}</div>`).join('');
+  const done=qAns.filter(x=>x!==null).length,right=qAns.filter((x,i)=>x===QZ[i].a).length;
+  $('quizScore').innerHTML=done?`<div class="stats">${stat(t('الإجابات الصحيحة','Correct'),`${right} / ${QZ.length}`,true)}</div>`+(done===QZ.length?`<div class="row" style="margin-top:0"><button type="button" class="btn ghost" id="qReset">${t('أعد الاختبار','Reset quiz')}</button></div>`:''):''}
+$('quiz').addEventListener('click',e=>{const b=e.target.closest('button[data-q]');if(!b)return;const i=+b.dataset.q;if(qAns[i]===null){qAns[i]=b.dataset.o;quizRender()}});
+$('quizScore').addEventListener('click',e=>{if(e.target.id==='qReset'){qAns.fill(null);quizRender()}});
+
+/* ---- participant flow ---- */
+function flow(){const A=num(flA.value),I=num(flI.value),E=num(flE.value),R=num(flR.value),Lo=num(flL.value);
+  if([A,I,E,R,Lo].some(x=>!isInt(x)||x<0)){$('flOut').innerHTML=note(t('أدخل أعداداً صحيحة غير سالبة.','Enter non-negative whole numbers.'),'warn');return}
+  const el=A-I-E,en=el-R,an=en-Lo;
+  if(el<0||en<0||an<0){$('flOut').innerHTML=note(t('الأعداد غير متسقة: المستبعدون أكثر من المتاحين في إحدى المراحل.','Numbers are inconsistent: removals exceed those available at some stage.'),'warn');return}
+  const box=(l,v,c='')=>`<div class="fb ${c}">${l}<b>n = ${v}</b></div>`;
+  const ar=`<div class="arrow"></div>`;
+  const part=el?en/el:0,comp=en?an/en:0;
+  let h=`<div class="flow">
+   <div class="fr">${box(t('تم تقييم أهليتهم','Assessed for eligibility'),A)}<div></div></div>${ar}
+   <div class="fr">${box(t('مؤهلون','Eligible'),el)}${box(t(`مستبعدون: لم يحققوا الاشتمال ${I}، معايير الاستبعاد ${E}`,`Excluded: inclusion not met ${I}; exclusion criteria ${E}`),I+E,'side')}</div>${ar}
+   <div class="fr">${box(t('شاركوا','Enrolled'),en)}${box(t('رفضوا المشاركة','Declined'),R,'side')}</div>${ar}
+   <div class="fr">${box(t('دخلوا التحليل','Analysed'),an,'end')}${box(t('بيانات ناقصة / انسحاب','Incomplete / withdrew'),Lo,'side')}</div></div>`;
+  h+=`<div class="stats">${stat(t('نسبة المشاركة','Participation rate'),(part*100).toFixed(1)+'%',true)}${stat(t('نسبة الإكمال','Completion rate'),(comp*100).toFixed(1)+'%')}${stat(t('المحللون من المؤهلين','Analysed of eligible'),(el?an/el*100:0).toFixed(1)+'%')}</div>`;
+  h+=note(t('كلما انخفضت نسبة المشاركة زاد خطر تحيز عدم الاستجابة. قارن خصائص المشاركين وغير المشاركين إن أمكن، واعرض هذا المخطط في النتائج (STROBE، البند 13).','The lower the participation rate, the greater the risk of nonresponse bias. Compare participants with non-participants where possible and present this diagram in the results (STROBE item 13).'));
+  $('flOut').innerHTML=h}
+['flA','flI','flE','flR','flL'].forEach(id=>$(id).addEventListener('input',flow));
+
+/* ---- random number table ---- */
+const RT_ROWS=20;
+function rt(){const N=num(rtN.value),n=num(rtn.value),row=num(rtRow.value),col=num(rtCol.value),seed=num(rtSeed.value);
+  let e=chkNn(N,n);
+  if(!e&&(!isInt(row)||row<1||row>RT_ROWS))e=t(`صف البداية بين 1 و ${RT_ROWS}.`,`Start row must be 1–${RT_ROWS}.`);
+  if(!e&&(!isInt(col)||col<1||col>10))e=t('عمود البداية بين 1 و 10.','Start column must be 1–10.');
+  if(!e&&!isInt(seed))e=t('البذرة عدد صحيح.','Seed must be a whole number.');
+  const rng=mulberry(isInt(seed)?seed:1),D=Array.from({length:RT_ROWS*50},()=>Math.floor(rng()*10));
+  const cls=new Array(D.length).fill('');
+  let acc=[],rej=0,dup=0,read=0;
+  if(!e){const d=String(N).length,seen=new Set();let i=(row-1)*50+(col-1)*5,ch=0;
+    while(i+d<=D.length&&acc.length<n){const v=+D.slice(i,i+d).join('');let c;
+      if(v>=1&&v<=N&&!seen.has(v)){c='acc';seen.add(v);acc.push(v)}else if(v>=1&&v<=N){c='dup';dup++}else{c='rej';rej++}
+      for(let j=i;j<i+d;j++)cls[j]=c+(ch%2?' alt':'')+(ch===0&&j===i?' st':'');i+=d;ch++;read++}}
+  let th='<thead><tr><th></th>'+Array.from({length:10},(_,c)=>`<th>${c+1}</th>`).join('')+'</tr></thead><tbody>';
+  for(let r=0;r<RT_ROWS;r++){th+=`<tr><th class="rh">${r+1}</th>`;for(let c=0;c<10;c++){const b=r*50+c*5;
+    th+='<td>'+[0,1,2,3,4].map(k=>`<span class="dg ${cls[b+k]}">${D[b+k]}</span>`).join('')+'</td>'}th+='</tr>'}
+  $('rtTable').innerHTML=th+'</tbody>';
+  if(e){$('rtOut').innerHTML=note(e,'warn');return}
+  let h=`<div class="stats">${stat(t('خانات القراءة','Digits per read'),String(N).length)}${stat(t('أرقام مقروءة','Numbers read'),read)}${stat(t('مقبولة','Accepted'),acc.length,true)}${stat(t('خارج المدى','Out of range'),rej)}${stat(t('مكررة','Repeats'),dup)}</div>`;
+  if(acc.length<n)h+=note(t('انتهى الجدول قبل اكتمال العينة. اختر بداية أبكر أو جدولاً جديداً.','The table ran out before the sample was complete. Choose an earlier start or a new table.'),'warn');
+  h+=note(t('الوحدات المختارة بترتيب السحب:','Selected units in order of selection:'))+chips(acc);
+  h+=note(t(`للمنهجية: استُخدم جدول أرقام عشوائية (البذرة ${seed})، بدءاً من الصف ${row} والعمود ${col}، بقراءة ${String(N).length} خانات أفقياً.`,`For the methods: a random number table (seed ${seed}) was used, starting at row ${row}, column ${col}, reading ${String(N).length} digits horizontally.`),'ok');
+  $('rtOut').innerHTML=h}
+['rtN','rtn','rtRow','rtCol','rtSeed'].forEach(id=>$(id).addEventListener('input',rt));
+$('rtBtn').onclick=()=>{rtSeed.value=newSeed();rt()};
+
+/* ---- SRS from a list ---- */
+lsText.value=Array.from({length:40},(_,i)=>'MRN-'+(1001+i*7)).join('\n');
+let lsLast='';
+function ls(){const items=lsText.value.split('\n').map(x=>x.trim()).filter(Boolean),n=num(lsn.value),seed=num(lsSeed.value);
+  let e=chkNn(items.length,n);if(!items.length)e=t('أضف عناصر إلى القائمة.','Add entries to the list.');
+  if(!e&&!isInt(seed))e=t('البذرة عدد صحيح.','Seed must be a whole number.');
+  if(e){$('lsOut').innerHTML=note(e,'warn');lsLast='';return}
+  const dups=items.length-new Set(items).size;
+  const idx=draw(items.length,n,mulberry(seed));
+  lsLast=`Seed ${seed}; N = ${items.length}; n = ${n}\n`+idx.map(i=>`${i}\t${items[i-1]}`).join('\n');
+  let h=`<div class="stats">${stat('N',items.length)}${stat('n',n)}${stat(t('البذرة','Seed'),seed)}</div>`;
+  if(dups)h+=note(t(`في القائمة ${dups} عنصر مكرر. الإطار يجب أن يكون بلا تكرار، وإلا ارتفعت فرصة المكرر.`,`The list contains ${dups} duplicate entries. A frame must be free of duplicates, or duplicated units gain extra chance.`),'warn');
+  h+=`<div class="tablewrap" style="margin-top:0"><table><thead><tr><th>#</th><th>${t('رقم السطر','Line')}</th><th>${t('العنصر','Entry')}</th></tr></thead><tbody>${idx.map((i,k)=>`<tr><td class="num">${k+1}</td><td class="num">${i}</td><td>${esc(items[i-1])}</td></tr>`).join('')}</tbody></table></div>`;
+  $('lsOut').innerHTML=h}
+['lsText','lsn','lsSeed'].forEach(id=>$(id).addEventListener('input',ls));
+$('lsBtn').onclick=()=>{lsSeed.value=newSeed();ls()};
+$('lsCopy').onclick=async()=>{if(!lsLast)return;const b=$('lsCopy');
+  try{await navigator.clipboard.writeText(lsLast);b.dataset.done='1'}catch(err){const ta=document.createElement('textarea');ta.value=lsLast;document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(x){}ta.remove()}
+  const old=b.innerHTML;b.textContent=t('تم النسخ','Copied');setTimeout(()=>{b.innerHTML=old},1400)};
+
+/* ---- error simulator ---- */
+const ER={clean:{erR1:100,erR0:100,erSe:100,erSp:100},nr:{erR1:60,erR0:90,erSe:100,erSp:100},meas:{erR1:100,erR0:100,erSe:85,erSp:90}};
+let erRes=null,erKey='',erPending=false;
+function erVals(){return{p:+erP.value/100,n:+erN.value,r1:+erR1.value/100,r0:+erR0.value/100,se:+erSe.value/100,sp:+erSp.value/100}}
+function er(fresh){const v=erVals();
+  [['erP','%'],['erN',''],['erR1','%'],['erR0','%'],['erSe','%'],['erSp','%']].forEach(([id,u])=>$(id+'v').textContent=$(id).value+u);
+  const key=JSON.stringify(v);
+  if(fresh||key!==erKey||!erRes){const B=500,est=[];let cov=0;
+    for(let b=0;b<B;b++){let pos=0,resp=0;
+      for(let i=0;i<v.n;i++){const c=Math.random()<v.p;if(Math.random()<(c?v.r1:v.r0)){resp++;if(Math.random()<(c?v.se:1-v.sp))pos++}}
+      if(!resp)continue;const x=pos/resp;est.push(x);if(Math.abs(x-v.p)<=1.96*Math.sqrt(x*(1-x)/resp))cov++}
+    erRes={est,cov:cov/est.length};erKey=key}
+  const {est,cov}=erRes,m=est.reduce((a,b)=>a+b,0)/est.length,sd=Math.sqrt(est.reduce((a,b)=>a+(b-m)**2,0)/(est.length-1));
+  const pr=v.p*v.r1/(v.p*v.r1+(1-v.p)*v.r0),pobs=pr*v.se+(1-pr)*(1-v.sp),bias=pobs-v.p,nr=v.n*(v.p*v.r1+(1-v.p)*v.r0);
+  // chart
+  let lo=Math.max(0,v.p-0.3),hi=Math.min(1,v.p+0.3);lo=Math.min(lo,Math.min(...est));hi=Math.max(hi,Math.max(...est));
+  const W=600,H=250,ml=36,mr=12,mt=12,mb=30,bins=48,bw=(hi-lo)/bins,cnt=new Array(bins).fill(0);
+  est.forEach(x=>{cnt[Math.min(bins-1,Math.floor((x-lo)/bw))]++});
+  const mx=Math.max(...cnt),X=x=>ml+(x-lo)/(hi-lo)*(W-ml-mr),Y=c=>H-mb-c/mx*(H-mt-mb);
+  let g='';cnt.forEach((c,i)=>{if(c)g+=`<rect class="bar" x="${X(lo+i*bw)+0.5}" y="${Y(c)}" width="${Math.max(1,X(lo+bw)-X(lo)-1)}" height="${H-mb-Y(c)}"/>`});
+  let ax=`<line class="ax" x1="${ml}" x2="${W-mr}" y1="${H-mb}" y2="${H-mb}"/>`;
+  const step=(hi-lo)>0.4?0.1:0.05;for(let tk=Math.ceil(lo/step-1e-9)*step;tk<=hi+1e-9;tk+=step)ax+=`<line class="ax" x1="${X(tk)}" x2="${X(tk)}" y1="${H-mb}" y2="${H-mb+4}"/><text x="${X(tk)}" y="${H-mb+17}" text-anchor="middle">${Math.round(tk*100)}%</text>`;
+  ax+=`<text x="${ml-6}" y="${mt+8}" text-anchor="end">${mx}</text><text x="${ml-6}" y="${H-mb}" text-anchor="end">0</text>`;
+  const lines=`<line class="tru" x1="${X(v.p)}" x2="${X(v.p)}" y1="${mt}" y2="${H-mb}"/><line class="mea" x1="${X(m)}" x2="${X(m)}" y1="${mt}" y2="${H-mb}"/>`;
+  $('erChart').innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Histogram of estimates">${g}${ax}${lines}</svg>`;
+  const pp=x=>(x*100).toFixed(1);
+  let h=`<div class="stats">${stat(t('القيمة الحقيقية','True value'),pp(v.p)+'%')}${stat(t('متوسط التقديرات','Mean estimate'),pp(m)+'%')}${stat(t('التحيز','Bias'),(bias>=0?'+':'')+pp(bias)+' pp')}${stat(t('الخطأ المعياري التجريبي','Empirical SE'),pp(sd)+' pp')}${stat(t('الخطأ المعياري النظري','Theoretical SE'),pp(Math.sqrt(pobs*(1-pobs)/nr))+' pp')}${stat(t('تغطية فترات الثقة 95%','95% CI coverage'),(cov*100).toFixed(0)+'%')}</div>`;
+  h+=Math.abs(bias)<0.005
+    ?note(t(`لا يوجد تحيز: التقديرات تتوزع حول القيمة الحقيقية، والتشتت هو خطأ المعاينة وحده (SE = √[p(1−p)/n]). حرّك n للأعلى ولاحظ ضيق التوزيع، ونحو 95% من فترات الثقة تحتوي القيمة الحقيقية.`,`No bias: estimates centre on the true value and the spread is pure sampling error (SE = √[p(1−p)/n]). Increase n and watch the distribution narrow, with about 95% of CIs covering the truth.`),'ok')
+    :note(t(`تحيز منهجي قدره ${pp(Math.abs(bias))} نقطة مئوية. زد n: سيضيق التوزيع (يقل خطأ المعاينة) لكنه يبقى مُزاحاً عن القيمة الحقيقية، وتنخفض تغطية فترات الثقة. زيادة الحجم لا تعالج الخطأ غير المتعلق بالمعاينة؛ يعالجه التصميم الجيد للإطار والأداة ومتابعة غير المستجيبين.`,`Systematic bias of ${pp(Math.abs(bias))} percentage points. Increase n: the distribution narrows (less sampling error) but stays off target, and CI coverage falls. A larger sample does not fix non-sampling error; a good frame, a valid instrument and follow-up of non-responders do.`),'warn');
+  $('erOut').innerHTML=h}
+['erP','erN','erR1','erR0','erSe','erSp'].forEach(id=>$(id).addEventListener('input',()=>{if(erPending)return;erPending=true;requestAnimationFrame(()=>{erPending=false;er(true)})}));
+document.querySelector('.presets').addEventListener('click',e=>{const b=e.target.closest('[data-pre]');if(!b)return;const p=ER[b.dataset.pre];Object.keys(p).forEach(k=>$(k).value=p[k]);er(true)});
+$('erBtn').onclick=()=>er(true);
+
+/* ---- visitor counter (Firebase Realtime Database; short connections, see README) ---- */
+(function(){
+  const cfg=window.SAMPLIFY_FIREBASE;
+  const box=$('visits');
+  if(!cfg||!cfg.databaseURL||!/^https:\/\//.test(cfg.databaseURL))return;
+  const V='10.12.2',SDK=['app','database'].map(p=>`https://www.gstatic.com/firebasejs/${V}/firebase-${p}-compat.js`);
+  const load=src=>new Promise((ok,no)=>{const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=no;document.head.appendChild(s)});
+  const fmt=x=>Number(x||0).toLocaleString('en-US');
+  const day=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Baghdad',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+  const get=(store,key)=>{try{return store.getItem(key)}catch(e){return null}};
+  const put=(store,key,val)=>{try{store.setItem(key,val)}catch(e){}};
+  let db,inc,counted=false,lastMin=null,timer=null,busy=false;
+  const withTimeout=(p,ms)=>Promise.race([p,new Promise((_,no)=>setTimeout(()=>no(new Error('timeout')),ms))]);
+  async function cycle(){
+    if(busy||document.visibilityState!=='visible')return schedule();
+    busy=true;
+    try{
+      db.goOnline();
+      const jobs=[];
+      if(!counted){
+        if(!get(sessionStorage,'sk-session')){
+          jobs.push(db.ref('stats/visits').set(inc),db.ref('daily/'+day()).set(inc));
+          if(!get(localStorage,'sk-visitor'))jobs.push(db.ref('stats/visitors').set(inc).then(()=>put(localStorage,'sk-visitor','1')));
+          put(sessionStorage,'sk-session','1');
+        }
+        counted=true;
+      }
+      const m=Math.floor(Date.now()/60000);
+      if(m!==lastMin){jobs.push(db.ref('live/'+m).set(inc));lastMin=m}
+      await withTimeout(Promise.all(jobs),10000);
+      const [s,d,l]=await withTimeout(Promise.all([
+        db.ref('stats').once('value'),db.ref('daily/'+day()).once('value'),
+        db.ref('live').orderByKey().startAt(String(m-1)).once('value')]),10000);
+      const sv=s.val()||{},lv=l.val()||{};
+      $('vsLive').textContent=fmt(Math.max(lv[m-1]||0,lv[m]||0,1));
+      $('vsToday').textContent=fmt(d.val());
+      $('vsTotal').textContent=fmt(sv.visits);
+      $('vsUniq').textContent=fmt(sv.visitors);
+      box.hidden=false;
+    }catch(e){/* keep the last numbers; try again next minute */}
+    finally{try{db.goOffline()}catch(e){}busy=false;schedule()}
+  }
+  function schedule(){clearTimeout(timer);const now=Date.now(),next=(Math.floor(now/60000)+1)*60000+5000+Math.random()*45000;timer=setTimeout(cycle,next-now)}
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&Math.floor(Date.now()/60000)!==lastMin)cycle()});
+  (async()=>{
+    try{await load(SDK[0]);await load(SDK[1])}catch(e){return}
+    try{firebase.initializeApp(cfg);db=firebase.database();inc=firebase.database.ServerValue.increment(1)}catch(e){return}
+    cycle();
+  })();
+})();
+
+function renderAll(){ss();srs(false);sys(false);stRender();cl();ppsRender();qRender();quizRender();flow();rt();ls();er(false)}
+let lang='ar';try{lang=localStorage.getItem('samp-lang')||'ar'}catch(e){}
+show(location.hash.slice(1));setLang(lang==='en'?'en':'ar');
+</script>
+
+</body>
+</html>

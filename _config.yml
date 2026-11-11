@@ -1,0 +1,7 @@
+# Samplify Kinani - GitHub Pages configuration
+title: Samplify Kinani
+description: Interactive sampling techniques and sample size platform
+lang: ar
+# Files kept in the repository but not published on the site
+exclude:
+  - README.md

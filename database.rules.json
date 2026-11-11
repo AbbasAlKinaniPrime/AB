@@ -1,0 +1,19 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "stats": {
+      ".read": true,
+      "visits":   { ".write": true, ".validate": "newData.isNumber() && newData.val() === (data.exists() ? data.val() : 0) + 1" },
+      "visitors": { ".write": true, ".validate": "newData.isNumber() && newData.val() === (data.exists() ? data.val() : 0) + 1" }
+    },
+    "daily": {
+      ".read": true,
+      "$day": { ".write": true, ".validate": "$day.matches(/^20[0-9][0-9]-[01][0-9]-[0-3][0-9]$/) && newData.isNumber() && newData.val() === (data.exists() ? data.val() : 0) + 1" }
+    },
+    "live": {
+      ".read": true,
+      "$minute": { ".write": true, ".validate": "$minute.matches(/^[0-9]{8,9}$/) && newData.isNumber() && newData.val() === (data.exists() ? data.val() : 0) + 1" }
+    }
+  }
+}
